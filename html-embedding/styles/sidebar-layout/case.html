@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- 画布式海报布局模板（作者认可版）：左侧文本侧栏 + 右侧大图 + 顶/底细条不压主体。
+     用法：改 <title>、侧栏文案、评分数值、图片 src，然后 Edge headless 截图。
+     body 尺寸 = 侧栏宽 + 主图宽；截图时 --window-size 必须与此一致。 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>二次元美少女评鉴指南</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1848px; height: 1824px; overflow: hidden; }
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif;
+    background: #0e0818;
+    display: flex;
+  }
+
+  /* ===== 左侧文本侧栏 ===== */
+  .sidebar {
+    width: 560px; height: 1824px; flex-shrink: 0;
+    background:
+      radial-gradient(circle at 20% 8%, rgba(255,94,122,0.18), transparent 42%),
+      radial-gradient(circle at 80% 90%, rgba(255,179,92,0.12), transparent 40%),
+      linear-gradient(180deg, #150a24 0%, #0e0818 55%, #1a0c20 100%);
+    padding: 56px 44px;
+    display: flex; flex-direction: column;
+    border-right: 1px solid rgba(255,215,94,0.25);
+  }
+  .vol {
+    color: #ffd75e; font-size: 22px; letter-spacing: 8px;
+    border: 1px solid rgba(255,215,94,0.5);
+    display: inline-block; padding: 10px 22px; border-radius: 999px;
+    margin-bottom: 30px; align-self: flex-start;
+  }
+  .vol b { color: #fff; }
+  .side-title {
+    color: #fff; font-size: 52px; font-weight: 900; line-height: 1.25; letter-spacing: 4px;
+    margin-bottom: 14px;
+  }
+  .side-title em {
+    font-style: normal;
+    background: linear-gradient(180deg, #ff8fb3, #ff4d7d);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .side-slogan { color: #ffd75e; font-size: 21px; letter-spacing: 4px; margin-bottom: 46px; }
+  .side-slogan .hot { color: #ff5e7a; font-weight: 700; }
+
+  .stars { color: #ffd75e; font-size: 30px; letter-spacing: 8px; margin-bottom: 40px; text-shadow: 0 0 18px rgba(255,215,94,0.6); }
+
+  .row { display: flex; align-items: center; margin-bottom: 22px; }
+  .row .lab { color: rgba(255,255,255,0.85); font-size: 20px; letter-spacing: 3px; width: 120px; flex-shrink: 0; }
+  .row .meter { flex: 1; height: 14px; background: rgba(255,255,255,0.1); border-radius: 999px; overflow: hidden; margin: 0 16px; }
+  .row .meter i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #ff4d7d, #ffb35c); box-shadow: 0 0 12px rgba(255,120,120,0.65); }
+  .row .num { color: #ffd75e; font-size: 21px; font-weight: 700; width: 48px; text-align: right; }
+
+  .divider { border: 0; border-top: 1px dashed rgba(255,255,255,0.2); margin: 34px 0; }
+
+  .comment { color: rgba(255,255,255,0.92); font-size: 20px; line-height: 1.9; letter-spacing: 1px; flex: 1; }
+  .comment b { color: #ffd75e; }
+  .comment .pink { color: #ff9db9; }
+
+  .footer-note {
+    margin-top: 30px; padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.55); font-size: 16px; line-height: 2; letter-spacing: 2px;
+  }
+  .footer-note b { color: #ff9db9; }
+
+  /* ===== 右侧主图区 ===== */
+  .stage {
+    flex: 1; height: 1824px;
+    background: #000;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .stage img { height: 1824px; width: auto; object-fit: cover; }
+
+  .topbar {
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 84px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 40px;
+    background: linear-gradient(180deg, rgba(8,4,14,0.85) 0%, rgba(8,4,14,0.35) 80%, rgba(8,4,14,0) 100%);
+    color: #fff;
+  }
+  .topbar .t1 { font-size: 22px; letter-spacing: 6px; }
+  .topbar .t1 b { color: #ffd75e; }
+  .topbar .t2 {
+    font-size: 19px; letter-spacing: 4px; color: #ff9db9;
+    border: 1px solid rgba(255,157,185,0.6);
+    padding: 6px 18px; border-radius: 999px;
+    transform: rotate(-2deg);
+  }
+  .bottombar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 70px;
+    display: flex; align-items: center; justify-content: center; gap: 40px;
+    background: linear-gradient(0deg, rgba(8,4,14,0.85) 0%, rgba(8,4,14,0.3) 80%, rgba(8,4,14,0) 100%);
+    color: rgba(255,255,255,0.9); font-size: 18px; letter-spacing: 2px;
+  }
+  .bottombar span b { color: #ffd75e; }
+</style>
+</head>
+<body>
+
+  <!-- 左侧侧栏 -->
+  <div class="sidebar">
+    <div class="vol">VOL.<b>008</b> · 深夜放送</div>
+    <div class="side-title">二次元<em>美少女</em><br>评鉴指南</div>
+    <div class="side-slogan">今晚，她的<span class="hot">脚尖</span>会说话</div>
+
+    <div class="stars">★★★★★</div>
+
+    <div class="row"><div class="lab">丝袜光泽</div><div class="meter"><i style="width:99%"></i></div><div class="num">99</div></div>
+    <div class="row"><div class="lab">撩人指数</div><div class="meter"><i style="width:95%"></i></div><div class="num">95</div></div>
+    <div class="row"><div class="lab">清纯度</div><div class="meter"><i style="width:88%"></i></div><div class="num">88</div></div>
+    <div class="row"><div class="lab">足部观赏</div><div class="meter"><i style="width:98%"></i></div><div class="num">98</div></div>
+
+    <hr class="divider">
+
+    <div class="comment">
+      本期评鉴对象：<b>小女仆·M</b>（清纯系 · 成年）<br><br>
+      黑丝在灯光下泛着<span class="pink">危险的光泽</span>，<br><br>
+      评鉴员当场宣布：这是本月<b>最值得反复品鉴</b>的一双脚。<br><br>
+      <b>结论：</b>五星，预定。<br><br>
+      <b>唯一忠告：</b>看的时候，请务必准备好纸巾。
+    </div>
+
+    <div class="footer-note">
+      出品：<b>dogma studio</b><br>
+      本期评鉴员：dogma<br>
+      图源：anima 工作流 · 固定副本
+    </div>
+  </div>
+
+  <!-- 右侧主图区：替换为本次底图绝对路径 -->
+  <div class="stage">
+    <img src="YOUR_IMAGE_PATH" alt="">
+    <div class="topbar">
+      <div class="t1">二 次 元 美 少 女 <b>评 鉴 指 南</b> · 特 刊</div>
+      <div class="t2">仅限成人 · 深夜放送</div>
+    </div>
+    <div class="bottombar">
+      <span>丝袜光泽 <b>99</b></span>
+      <span>撩人指数 <b>95</b></span>
+      <span>清纯度 <b>88</b></span>
+      <span>综合评定 <b>★★★★★</b></span>
+    </div>
+  </div>
+
+</body>
+</html>

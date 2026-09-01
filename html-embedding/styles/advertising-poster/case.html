@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1080px; height:1272px; overflow:hidden; position:relative;
+    font-family:'Microsoft YaHei','Segoe UI',sans-serif; background:#1a1310; }
+
+  /* 全幅图1（人物+金字+环境，主体），占满整幅 */
+  .img { position:absolute; top:0; left:0; width:1080px; height:1140px; z-index:1; }
+  .img img { width:1080px; height:1140px; object-fit:cover; display:block; }
+
+  /* 左侧轻投影（保证文字在墙上可读，但不做成色块） */
+  .veil { position:absolute; top:0; left:0; width:520px; height:1140px; z-index:2;
+    background:linear-gradient(100deg, rgba(28,20,14,0.42) 0%, rgba(28,20,14,0.24) 36%,
+      rgba(28,20,14,0.05) 60%, rgba(28,20,14,0) 78%); }
+
+  /* 左侧文字（叠在墙面，避开顶部金字和右侧人物） */
+  .text { position:absolute; top:430px; left:0; width:520px; height:720px; z-index:3;
+    padding-left:64px; }
+  .sign { font-family:'Segoe Script','Lucida Handwriting',cursive; font-size:44px; color:#1b1b1b;
+    text-shadow:0 1px 2px rgba(255,255,255,0.5); }
+  .sign-sub { font-family:Georgia,serif; font-size:17px; color:#3a3a3a; letter-spacing:.24em;
+    margin-top:4px; text-shadow:0 1px 2px rgba(255,255,255,0.45); }
+
+  .big-title { margin-top:34px; font-family:'STXingkai','STKaiti','KaiTi',cursive;
+    font-size:96px; font-weight:900; color:#b01818; line-height:0.98; letter-spacing:.02em;
+    text-shadow:0 3px 10px rgba(0,0,0,0.25); }
+
+  .stars-line { margin-top:24px; display:flex; align-items:center; gap:10px; }
+  .stars-line .bar { flex:0 0 54px; height:2px; background:#c9a53a; }
+  .stars-line .mid { font-family:Georgia,serif; font-size:16px; color:#2a2a2a; letter-spacing:.14em;
+    white-space:nowrap; text-shadow:0 1px 2px rgba(255,255,255,0.5); }
+  .stars-line .bar2 { flex:0 0 54px; height:2px; background:#c9a53a; }
+
+  .slogan { margin-top:34px; }
+  .slogan .s1 { font-size:58px; font-weight:900; color:#171717; line-height:1.08;
+    font-family:'SimHei','Microsoft YaHei',sans-serif; text-shadow:0 1px 3px rgba(255,255,255,0.35); }
+  .slogan .s2 { font-size:66px; font-weight:900; color:#b01818; line-height:1.08; margin-top:2px;
+    font-family:'SimHei',sans-serif; text-shadow:0 2px 6px rgba(0,0,0,0.18); }
+  .brush { margin-top:6px; width:290px; height:12px; transform:skewX(-24deg); border-radius:8px;
+    background:linear-gradient(90deg,#b01818, rgba(176,24,24,0.35) 75%, rgba(176,24,24,0)); }
+
+  .cases { margin-top:40px; }
+  .case { display:flex; align-items:center; gap:13px; margin-bottom:20px; }
+  .check { width:32px; height:32px; border-radius:50%; flex-shrink:0; font-size:17px; color:#fff;
+    font-weight:900; display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 35% 30%, #c83030, #961515);
+    box-shadow:0 2px 4px rgba(0,0,0,0.3); }
+  .case .c { font-size:24px; color:#22242c; font-weight:600; text-shadow:0 1px 2px rgba(255,255,255,0.45); }
+
+  .we-can { margin-top:34px; font-size:26px; font-weight:800; color:#b01818;
+    text-shadow:0 1px 2px rgba(255,255,255,0.4); }
+  .extra { margin-top:12px; font-size:20px; color:#22242c; font-weight:600; line-height:1.55;
+    text-shadow:0 1px 2px rgba(255,255,255,0.45); }
+  .extra .hl { color:#b01818; font-weight:900; }
+
+  /* 底部联系条（白色横贯） */
+  .contact-bar { position:absolute; bottom:0; left:0; width:1080px; height:132px; z-index:5;
+    background:#f4f1ea; display:flex; align-items:center; justify-content:space-around; }
+  .cb { display:flex; align-items:center; gap:14px; }
+  .cb-ico { width:46px; height:46px; border-radius:50%; background:#12306b; color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; }
+  .cb-txt .l { font-size:14px; color:#6b6f78; letter-spacing:.03em; }
+  .cb-txt .v { font-size:24px; color:#12306b; font-weight:700; }
+  .cb-txt .v.red { color:#b01818; }
+  .cb-div { width:1px; height:52px; background:#ddd6ca; }
+
+  /* 右下角蓝色做旧钢印 */
+  .stamp-wrap { position:absolute; z-index:6; right:70px; bottom:200px; width:320px; height:320px;
+    transform:rotate(-11deg); }
+  .stamp { position:absolute; inset:0; border-radius:50%;
+    background:radial-gradient(circle at 44% 38%, #4579c2 0%, #2d5aa4 48%, #1d3e7c 100%);
+    box-shadow:inset 0 0 30px rgba(0,0,0,0.32); display:flex; align-items:center; justify-content:center; }
+  .stamp::before { content:""; position:absolute; inset:13px; border-radius:50%; border:3px solid rgba(255,255,255,0.3); }
+  .stamp::after { content:""; position:absolute; inset:27px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.2); }
+  .stamp-text { position:relative; z-index:4; display:flex; flex-direction:column; align-items:center;
+    font-family:'STXingkai','STKaiti','KaiTi',cursive; color:#0d2a56; }
+  .stamp-text .star-t { font-size:20px; color:#dbe6f6; letter-spacing:11px; margin-bottom:14px; }
+  .stamp-text .l1 { font-size:50px; font-weight:700; letter-spacing:1px; line-height:1.15;
+    text-shadow:0 1px 0 rgba(255,255,255,0.2); }
+  .stamp-text .l2 { font-size:50px; font-weight:700; letter-spacing:3px; margin-top:11px;
+    text-shadow:0 1px 0 rgba(255,255,255,0.2); }
+  .stamp-text .star-b { font-size:20px; color:#dbe6f6; letter-spacing:14px; margin-top:16px; }
+  .stamp-noise { position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply; opacity:.8; z-index:5; }
+</style>
+</head>
+  <!--
+    广告招贴风案例 · 赛琳娜委托所海报（styles/advertising-poster）
+    - 图1：krea2 生成（人物右侧 + 工牌金字 + 顶部 SELINA ASSOCIATES + 律所环境），底图为 assets/selina_lawyer_base.png
+    - html：左侧多字体文字（草书签名/衬线/书法大字/黑红标语/红圆勾）直接印画上（轻投影）+ 底部白色联系条 + 右下蓝色做旧钢印
+    - 用法：替换底图为你的图1，改文字内容即可。截图 window-size = body 尺寸（1080×1272）。
+  -->
+<body>
+  <div class="img"><img src="assets/selina_lawyer_base.png"></div>
+  <div class="veil"></div>
+
+  <div class="text">
+    <div class="sign">Selina</div>
+    <div class="sign-sub">ATTORNEY&nbsp;AT&nbsp;LAW</div>
+    <div class="big-title">赛琳娜<br>委托所</div>
+    <div class="stars-line"><span class="bar"></span><span class="mid">★★★&nbsp;在中国，有些事…&nbsp;★★★</span><span class="bar2"></span></div>
+    <div class="slogan">
+      <div class="s1">你们管不了的事，</div>
+      <div class="s2">我们来管！</div>
+      <div class="brush"></div>
+    </div>
+    <div class="cases">
+      <div class="case"><div class="check">✓</div><div class="c">猫被邻居捉走？</div></div>
+      <div class="case"><div class="check">✓</div><div class="c">房东瞎涨房租？</div></div>
+      <div class="case"><div class="check">✓</div><div class="c">给她彩礼闹分手？</div></div>
+      <div class="case"><div class="check">✓</div><div class="c">论文被导师抢一作？</div></div>
+    </div>
+    <div class="we-can">没关系，我们都能帮！</div>
+    <div class="extra">哪怕只是拿回自己的<b class="hl">社保卡</b>，我们也能帮！</div>
+  </div>
+
+  <div class="contact-bar">
+    <div class="cb"><div class="cb-ico">☎</div><div class="cb-txt"><div class="l">联系赛琳娜</div><div class="v red">+86 138 0000 6666</div></div></div>
+    <div class="cb-div"></div>
+    <div class="cb"><div class="cb-ico">💬</div><div class="cb-txt"><div class="l">微信</div><div class="v">Selina_Associates_CN</div></div></div>
+    <div class="cb-div"></div>
+    <div class="cb"><div class="cb-ico">📍</div><div class="cb-txt"><div class="l">服务范围</div><div class="v">中国大陆</div></div></div>
+  </div>
+
+  <div class="stamp-wrap">
+    <div class="stamp">
+      <div class="stamp-text">
+        <div class="star-t">★ ★</div>
+        <div class="l1">你们管不了的事，</div>
+        <div class="l2">我们来管！</div>
+        <div class="star-b">★ ★</div>
+      </div>
+      <svg class="stamp-noise" width="320" height="320" viewBox="0 0 320 320">
+        <filter id="g3">
+          <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="4" seed="9" stitchTiles="stitch"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0.05  0 0 0 0 0.1  0 0 0 0 0.2  0 0 0 0.6 0"/>
+        </filter>
+        <rect width="320" height="320" filter="url(#g3)" opacity="0.6"/>
+      </svg>
+    </div>
+  </div>
+</body>
+</html>

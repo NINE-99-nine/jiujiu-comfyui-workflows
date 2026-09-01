@@ -1,0 +1,39 @@
+# <工作流名> 子技能 · 使用守则（guide v1.0）
+
+> 本守则与 <文件>.json（固定副本）配套。**加载一律用本目录内的副本**，不用本仓库目录下的原件——原件会被作者实时编辑，副本保证每次行为一致。
+
+## 副本信息
+
+| 项 | 值 |
+|---|---|
+| 固定副本 | `workflows/<工作流名>/<文件>.json`（本技能内） |
+| 原件位置 | `F:\Comfy-Desktop\ComfyUI-Installs\jiujiu-2\ComfyUI\user\default\workflows\<原件>.json` |
+| 归档校验 | 归档时 MD5 与原件一致；作者更新原件后副本不回跟（要更新副本需显式重新拷贝） |
+
+## 可改节点（本工作流唯一可控面）
+
+> ⚠️ 写本表前**必须实际加载验证**：哪些节点生效、哪些被屏蔽、提示词链怎么走——不要照抄别的 guide（见 NEW_WORKFLOW_GUIDE.md Step 2）。
+
+| 节点 ID | 功能 | 改法 |
+|---|---|---|
+| `??` | ?? | 数据路径 widgets_values[0] / 节点对象 widgets[i].value |
+
+## 加载与提交链路（简版）
+
+1. 临时服务器 `scripts/serve_wf.py`（WF_DIR 指向伞技能 `workflows/` 目录）→ curl 8765/ping
+2. 浏览器 `http://127.0.0.1:8188` → fetch 副本（**路径带子目录**：`/wf/<工作流名>/<文件>.json`，中文名 encodeURIComponent）→ 改节点 → `graphToPrompt()`（结果在 `.output`）→ POST `/api/prompt`（查 node_errors: {}）
+3. 成品在 `F:\Comfy-Desktop\ComfyUI-Shared\output\<日期>\`（F 盘）→ 重命名中文名交付
+
+详细执行/排障见 `execution/EXECUTION.md`。
+
+## 注意事项
+
+- （本工作流特有：分辨率规则 / 屏蔽节点 / 断链节点 / 性能参数……）
+
+## 验证清单
+
+- [ ] 副本加载成功（fetch 返回 JSON，节点数正确）
+- [ ] 提交返回 node_errors: {}
+- [ ] history 状态 success，成品在 F 盘
+- [ ] 原件未改（副本机制）
+- [ ] 交付文件为有意义中文名

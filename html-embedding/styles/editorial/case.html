@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>赛琳娜 · 衬线角色海报（凯特琳式）</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1a1a20;
+    font-family: "Songti SC", "SimSun", "Noto Serif SC", serif;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; padding: 40px 24px;
+  }
+  /* Stage = the unified background layer (the "extended canvas") — bottom of the stack */
+  .stage {
+    position: relative; width: min(920px, 94vw); aspect-ratio: 1140 / 1240; overflow: hidden;
+    background: #FAF9F8; box-shadow: 0 40px 90px rgba(0,0,0,0.6);
+  }
+
+  /* FIGURE — sits ON the background layer, right-aligned, right edge cropped by canvas */
+  .figure {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 60%; z-index: 1;
+    background-image: url('assets/底图_白发少女.png');
+    background-size: cover;
+    background-position: 26% 30%;   /* keep her left silhouette (face/shoulder) complete, right cropped */
+    background-repeat: no-repeat;
+  }
+  /* her figure fuses into the canvas — soft fade on the left silhouette, seated shadow at the base */
+  .figure::before {
+    content: ""; position: absolute; inset: 0; z-index: 2;
+    background:
+      radial-gradient(50% 28% at 46% 88%, rgba(70,66,56,0.16), transparent 72%),
+      linear-gradient(90deg, rgba(250,249,248,0.92) 0%, rgba(250,249,248,0) 16%),
+      linear-gradient(180deg, transparent 66%, rgba(250,249,248,0.92) 94%, #FAF9F8 100%);
+  }
+
+  /* TEXT — also on the background layer, left side, above everyone */
+  .text { position: absolute; left: 0; top: 0; bottom: 0; width: 44%; z-index: 5; padding: 60px 44px 48px 46px; display: flex; flex-direction: column; }
+
+  .insignia { width: 40px; height: 40px; margin-bottom: 32px; }
+  .aphorism { border-top: 1px solid #ddd9cf; padding-top: 16px; margin-bottom: 32px; }
+  .aphorism .l { font-size: 12.5px; letter-spacing: .24em; color: #3f3f48; line-height: 1.9; text-transform: uppercase; font-family: "Georgia", serif; }
+  .aphorism .dash { color: #a11226; }
+
+  .title-block { position: relative; margin-bottom: 22px; }
+  .title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: clamp(48px, 9vw, 88px); font-weight: 400;
+    letter-spacing: .16em; color: #24242c; line-height: .92;
+    transform: scaleY(1.16); transform-origin: center left;
+    text-transform: uppercase; white-space: nowrap; position: relative; z-index: 1;
+  }
+  .title-block::after { content: ""; position: absolute; left: 0; right: 6%; top: 52%; height: 1px; background: #59595f; opacity: .48; z-index: 0; }
+
+  .role { font-size: 13.5px; letter-spacing: .3em; color: #45454e; margin-bottom: 18px; font-family: "Georgia", serif; font-weight: 500; }
+  .brand { font-size: 11px; letter-spacing: .28em; color: #3a3a42; text-transform: uppercase; padding-bottom: 9px; border-bottom: 1px solid #ddd9cf; margin-bottom: 14px; font-family: "Georgia", serif; }
+  .zh { font-size: 14px; letter-spacing: .3em; color: #24242c; line-height: 2.05; }
+  .zh .r { color: #a11226; }
+  .redbar { width: 30px; height: 3px; background: #a11226; margin: 4px 0 16px; }
+
+  .grain { position: absolute; inset: 0; opacity: .4; mix-blend-mode: multiply; pointer-events: none; z-index: 6; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="figure"></div>
+  <div class="text">
+    <svg class="insignia" viewBox="0 0 40 40" fill="none">
+      <circle cx="20" cy="20" r="17" stroke="#3a3a42" stroke-width="1"/>
+      <circle cx="20" cy="20" r="11" stroke="#a11226" stroke-width="0.8"/>
+      <path d="M20 3 V37 M3 20 H37" stroke="#3a3a42" stroke-width="0.8"/>
+      <path d="M20 10 L20 30 M10 20 L30 20" stroke="#a11226" stroke-width="0.5"/>
+    </svg>
+    <div class="aphorism">
+      <div class="l">THE SNOW.</div>
+      <div class="l">THE SCARLET.</div>
+      <div class="l">THE SILENCE.</div>
+      <div class="l dash">— SHE REMEMBERS ALL.</div>
+    </div>
+    <div class="title-block"><div class="title">SERENA</div></div>
+    <div class="role">赛琳娜 · SNOWFALL</div>
+    <div class="brand">ORIGINAL OC SERIES</div>
+    <div class="redbar"></div>
+    <div class="zh">雪之女 · <span class="r">红瞳</span><br>白夜守望者</div>
+  </div>
+  <div class="grain"><svg width="100%" height="100%"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)" opacity="0.04"/></svg></div>
+</div>
+</body>
+</html>

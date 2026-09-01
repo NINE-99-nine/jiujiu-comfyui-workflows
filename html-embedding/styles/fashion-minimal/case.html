@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html,body { width:1440px; height:2560px; overflow:hidden; background:#000; font-family:'Segoe UI','Microsoft YaHei',sans-serif; }
+  .bg { position:absolute; top:0; left:0; width:1440px; height:2552px; }
+  .bg img { width:1440px; height:2552px; object-fit:cover; display:block; }
+  /* 顶部渐变压暗，保证白字可读 */
+  .scrim-top { position:absolute; top:0; left:0; width:1440px; height:900px;
+    background:linear-gradient(to bottom, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0) 100%); }
+  /* 底部渐变压暗 */
+  .scrim-bot { position:absolute; bottom:0; left:0; width:1440px; height:520px;
+    background:linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 55%, rgba(0,0,0,0) 100%); }
+  .top { position:absolute; top:0; left:0; width:1440px; padding:150px 110px 0; color:#fff; z-index:2; }
+  .brand { font-size:34px; font-weight:300; letter-spacing:0.85em; color:#fff; opacity:0.95; }
+  .title { margin-top:70px; font-family:Georgia,'Times New Roman',serif; font-size:118px; font-weight:400;
+    letter-spacing:0.06em; line-height:1.12; color:#fff; }
+  .sub { margin-top:52px; font-size:25px; font-weight:300; letter-spacing:0.42em; color:#fff; opacity:0.88; text-transform:uppercase; }
+  .rule { margin-top:46px; width:120px; height:1px; background:rgba(255,255,255,0.75); }
+  .bot { position:absolute; bottom:0; left:0; width:1440px; padding:0 110px 130px; color:#fff; z-index:2; }
+  .bot .line { width:100%; height:1px; background:rgba(255,255,255,0.35); margin-bottom:60px; }
+  .cities { font-size:23px; font-weight:300; letter-spacing:0.35em; color:#fff; opacity:0.9; text-transform:uppercase; }
+  .season { margin-top:26px; font-size:21px; font-weight:300; letter-spacing:0.3em; color:#fff; opacity:0.65; }
+  .sig { position:absolute; right:110px; bottom:130px; font-size:22px; font-weight:300; letter-spacing:0.5em; color:#fff; opacity:0.75; }
+</style>
+</head>
+<body>
+  <div class="bg"><img src="YOUR_IMAGE_PATH"></div>
+  <div class="scrim-top"></div>
+  <div class="scrim-bot"></div>
+
+  <div class="top">
+    <div class="brand">SERAPHINA</div>
+    <div class="title">A Wanderer's<br>Glance</div>
+    <div class="rule"></div>
+    <div class="sub">Luxury Eyewear &middot; Travel Collection</div>
+  </div>
+
+  <div class="bot">
+    <div class="line"></div>
+    <div class="cities">Paris &middot; Shanghai &middot; Tokyo</div>
+    <div class="season">Autumn 2026 &mdash; New Season</div>
+    <div class="sig">作者</div>
+  </div>
+</body>
+</html>

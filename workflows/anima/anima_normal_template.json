@@ -1,0 +1,642 @@
+{
+  "1": {
+    "inputs": {
+      "text": [
+        "7",
+        0
+      ],
+      "clip": [
+        "52",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "3": {
+    "inputs": {
+      "string": "score_9, score_8_up, score_7_up, masterpiece, best quality, amazing quality, absurdres, highres, very aesthetic,realistic,reverse light,golden light, best quality, amazing quality, very aesthetic,absurdres",
+      "strip_newlines": true
+    },
+    "class_type": "StringConstantMultiline",
+    "_meta": {
+      "title": "质量提示词"
+    }
+  },
+  "4": {
+    "inputs": {
+      "samples": [
+        "21",
+        0
+      ],
+      "vae": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "5": {
+    "inputs": {
+      "anything": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "清理显存占用"
+    }
+  },
+  "6": {
+    "inputs": {
+      "width": [
+        "19",
+        0
+      ],
+      "height": [
+        "19",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "7": {
+    "inputs": {
+      "inputcount": 8,
+      "delimiter": "",
+      "return_list": false,
+      "Update inputs": null,
+      "string_1": [
+        "3",
+        0
+      ],
+      "string_4": [
+        "23",
+        0
+      ],
+      "string_5": [
+        "52",
+        2
+      ]
+    },
+    "class_type": "JoinStringMulti",
+    "_meta": {
+      "title": "Join String Multi"
+    }
+  },
+  "8": {
+    "inputs": {
+      "unet_name": "anima\\anima-turbo-v1.0-int8-convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "9": {
+    "inputs": {
+      "gguf_name": "anima\\anima-turbo-v1.0-Q8_0.gguf"
+    },
+    "class_type": "LoaderGGUF",
+    "_meta": {
+      "title": "GGUF Loader"
+    }
+  },
+  "10": {
+    "inputs": {
+      "text": [
+        "188",
+        0
+      ],
+      "clip": [
+        "52",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "images": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "一次出图"
+    }
+  },
+  "13": {
+    "inputs": {
+      "clip_name": "Qwen3-0.6B-Base.Q8_0.gguf",
+      "type": "stable_diffusion",
+      "device": "default"
+    },
+    "class_type": "ClipLoaderGGUF",
+    "_meta": {
+      "title": "GGUF CLIP Loader"
+    }
+  },
+  "15": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "longest",
+      "scale_to_length": 1440,
+      "background_color": "#000000"
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "图层工具：按宽高比缩放 V2"
+    }
+  },
+  "17": {
+    "inputs": {
+      "vae_name": "qwen_image_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "19": {
+    "inputs": {
+      "width": 1024,
+      "height": 1536
+    },
+    "class_type": "ResolutionMasterSimplify",
+    "_meta": {
+      "title": "分辨率大师简化版 (Resolution Master Simplify)"
+    }
+  },
+  "21": {
+    "inputs": {
+      "seed": 394197152939345,
+      "steps": [
+        "68",
+        1
+      ],
+      "cfg": [
+        "69",
+        1
+      ],
+      "sampler_name": "euler_ancestral",
+      "scheduler": "beta",
+      "denoise": [
+        "352",
+        1
+      ],
+      "model": [
+        "52",
+        0
+      ],
+      "positive": [
+        "1",
+        0
+      ],
+      "negative": [
+        "10",
+        0
+      ],
+      "latent_image": [
+        "51",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "k采样器"
+    }
+  },
+  "23": {
+    "inputs": {
+      "string": "",
+      "strip_newlines": false
+    },
+    "class_type": "StringConstantMultiline",
+    "_meta": {
+      "title": "人设二"
+    }
+  },
+  "40": {
+    "inputs": {
+      "filename_prefix": "2026-08-18/162529",
+      "images": [
+        "344",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "51": {
+    "inputs": {
+      "selection_setting": [
+        "351",
+        1
+      ],
+      "input_1": [
+        "6",
+        0
+      ],
+      "input_2": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "TwoWaySwitch",
+    "_meta": {
+      "title": "Switch (Two Way)"
+    }
+  },
+  "52": {
+    "inputs": {
+      "__lm_autocomplete_meta_text": {
+        "version": 1,
+        "textWidgetName": "text"
+      },
+      "text": "<lora:sky02Lightv3:1.00> <lora:anima-base-1-masterpiece-v51:1.00> <lora:anima_context_detailer_base10:0.60> <lora:gpt-image-2_anima-base1_v1-1:1.00:1.00> <lora:far off in the morning haze024064645510a_30:0.80> <lora:Anima_in_real_update_v2_epoch_20:1.20> <lora:mixed_styles_anima-base1_v5:1.00>",
+      "loras": {
+        "__value__": [
+          {
+            "name": "anima-base-1-masterpiece-v51",
+            "strength": 1,
+            "active": true,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          },
+          {
+            "name": "anima_context_detailer_base10",
+            "strength": "0.60",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "0.60",
+            "locked": false
+          },
+          {
+            "name": "gpt-image-2_anima-base1_v1-1",
+            "strength": 1,
+            "active": true,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          },
+          {
+            "name": "sky02Lightv3",
+            "strength": "1.00",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "1.00",
+            "locked": false
+          },
+          {
+            "name": "far off in the morning haze024064645510a_30",
+            "strength": "0.80",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "0.80",
+            "locked": false
+          },
+          {
+            "name": "Anima_in_real_update_v2_epoch_20",
+            "strength": "1.20",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "1.20",
+            "locked": false
+          },
+          {
+            "name": "mixed_styles_anima-base1_v5",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
+          }
+        ]
+      },
+      "model": [
+        "70",
+        1
+      ],
+      "clip": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "Lora Loader (LoraManager)",
+    "_meta": {
+      "title": "Lora Loader (LoraManager)"
+    }
+  },
+  "64": {
+    "inputs": {
+      "value": 30
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "整数"
+    }
+  },
+  "65": {
+    "inputs": {
+      "value": 4
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "浮点数"
+    }
+  },
+  "68": {
+    "inputs": {
+      "优先输入": [
+        "64",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "69": {
+    "inputs": {
+      "优先输入": [
+        "65",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "70": {
+    "inputs": {
+      "优先输入": [
+        "8",
+        0
+      ],
+      "备用输入": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "73": {
+    "inputs": {
+      "gmm_ui": ""
+    },
+    "class_type": "GroupIgnoreManager",
+    "_meta": {
+      "title": "组忽略管理器 (Group Ignore Manager)"
+    }
+  },
+  "74": {
+    "inputs": {
+      "images": [
+        "349",
+        1
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "高清放大"
+    }
+  },
+  "75": {
+    "inputs": {
+      "images": [
+        "344",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "SD放大"
+    }
+  },
+  "188": {
+    "inputs": {
+      "inputcount": 2,
+      "delimiter": "",
+      "return_list": false,
+      "Update inputs": null,
+      "string_1": [
+        "192",
+        0
+      ]
+    },
+    "class_type": "JoinStringMulti",
+    "_meta": {
+      "title": "Join String Multi"
+    }
+  },
+  "192": {
+    "inputs": {
+      "string": "score_1, score_2, score_3, bad anatomy, bad proportions, deformed anatomy, deformed face, deformed eyes, text, multiple fingers, watermark, artist name, watermark, bad_feet, bad_hands, poorly drawn hands​, malformed hands​, bad anatomy​, mutated hands and fingers​, deformed​, disfigured​, ugly, Aura, blurry, lowres, out of focus, fuzzy, grainy, bad hand",
+      "strip_newlines": false
+    },
+    "class_type": "StringConstantMultiline",
+    "_meta": {
+      "title": "负面词"
+    }
+  },
+  "338": {
+    "inputs": {
+      "model": "ema_vae_fp16.safetensors",
+      "device": "xpu:0",
+      "encode_tiled": false,
+      "encode_tile_size": 1024,
+      "encode_tile_overlap": 128,
+      "decode_tiled": true,
+      "decode_tile_size": 1024,
+      "decode_tile_overlap": 128,
+      "tile_debug": "false",
+      "offload_device": "cpu",
+      "cache_model": false
+    },
+    "class_type": "SeedVR2LoadVAEModel",
+    "_meta": {
+      "title": "SeedVR2 (Down)Load VAE Model"
+    }
+  },
+  "339": {
+    "inputs": {
+      "model": "seedvr2_ema_7b-Q4_K_M.gguf",
+      "device": "xpu:0",
+      "blocks_to_swap": 32,
+      "swap_io_components": false,
+      "offload_device": "cpu",
+      "cache_model": false,
+      "attention_mode": "flash_attn_3"
+    },
+    "class_type": "SeedVR2LoadDiTModel",
+    "_meta": {
+      "title": "SeedVR2 (Down)Load DiT Model"
+    }
+  },
+  "344": {
+    "inputs": {
+      "seed": 1344063581,
+      "resolution": 1600,
+      "max_resolution": 3140,
+      "batch_size": 1,
+      "uniform_batch_size": false,
+      "color_correction": "lab",
+      "temporal_overlap": 0,
+      "prepend_frames": 0,
+      "input_noise_scale": 0,
+      "latent_noise_scale": 0,
+      "offload_device": "xpu:0",
+      "enable_debug": false,
+      "image": [
+        "349",
+        1
+      ],
+      "dit": [
+        "339",
+        0
+      ],
+      "vae": [
+        "338",
+        0
+      ]
+    },
+    "class_type": "SeedVR2VideoUpscaler",
+    "_meta": {
+      "title": "SeedVR2 Video Upscaler (v2.5.24)"
+    }
+  },
+  "348": {
+    "inputs": {
+      "images": [
+        "344",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "seedvr2放大"
+    }
+  },
+  "349": {
+    "inputs": {
+      "备用输入": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "350": {
+    "inputs": {
+      "gmm_ui": ""
+    },
+    "class_type": "GroupIgnoreManager",
+    "_meta": {
+      "title": "组忽略管理器 (Group Ignore Manager)"
+    }
+  },
+  "351": {
+    "inputs": {
+      "优先输入": [
+        "353",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "352": {
+    "inputs": {
+      "优先输入": [
+        "360",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "353": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "PrimitiveInt",
+    "_meta": {
+      "title": "整数"
+    }
+  },
+  "360": {
+    "inputs": {
+      "value": 1
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "浮点数"
+    }
+  },
+  "361": {
+    "inputs": {
+      "value": 0.55
+    },
+    "class_type": "easy float",
+    "_meta": {
+      "title": "浮点数"
+    }
+  },
+  "363": {
+    "inputs": {
+      "优先输入": [
+        "361",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "367": {
+    "inputs": {
+      "name": "anima\\anima-lllite-any-test-like-v2.safetensors"
+    },
+    "class_type": "ModelPatchLoader",
+    "_meta": {
+      "title": "加载模型补丁"
+    }
+  }
+}

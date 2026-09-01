@@ -1,0 +1,67 @@
+{
+  "3": {
+    "inputs": {
+      "filename_prefix": "audio/2026-08-25/011808",
+      "audio": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "SaveAudio",
+    "_meta": {
+      "title": "保存音频"
+    }
+  },
+  "4": {
+    "inputs": {
+      "model_name": "VoxCPM2",
+      "work_mode": "可控克隆",
+      "control_instruction": "年轻的英国贵族少女，声音优雅而冷清，仿佛在朗读文学作品",
+      "target_text": "我找到了工作目录里的\"灵魂\"配置文件。不过它是个 .yml 文件不是 .md，就在你挂载的 dogma-preset 里。让我顺便找到官方直接自带的 standard 预设的默认自我认知，方便给你对比。",
+      "speaker_count": 3,
+      "show_advanced": true,
+      "cfg_value": 2,
+      "inference_steps": 10,
+      "seed": 184692569466983,
+      "ui_language": "中文",
+      "lora_name": "shorekeeper_20260729_114945.safetensors",
+      "force_offload": false,
+      "auto_asr": true,
+      "reference_text": "",
+      "denoise_reference": true,
+      "normalize_text": true,
+      "normalize_loudness": true,
+      "model_profiles_json": "{\"VoxCPM2\": {\"architecture\": \"voxcpm2\"}, \"VoxCPM-0.5B\": {\"architecture\": \"voxcpm\"}, \"VoxCPM1.5\": {\"architecture\": \"voxcpm\"}}",
+      "reference_audio": [
+        "33",
+        2
+      ]
+    },
+    "class_type": "voxcpm_nkxx_unified_generator",
+    "_meta": {
+      "title": "VoxCPM 全能生成"
+    }
+  },
+  "32": {
+    "inputs": {
+      "value": "年轻的英国贵族少女，声音优雅而冷清，语调平稳舒缓，仿佛在朗读文学作品"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "字符串（多行）"
+    }
+  },
+  "33": {
+    "inputs": {
+      "voice_name": "voices/铅玻璃.mp3",
+      "reference_text": "The melody-like sound of rain drops on the window is always here, accompanying me through the long long night.",
+      "trim_start": 0,
+      "trim_end": 11.77,
+      "customized": false
+    },
+    "class_type": "CharacterVoicesNode",
+    "_meta": {
+      "title": "🎭 Character Voices"
+    }
+  }
+}

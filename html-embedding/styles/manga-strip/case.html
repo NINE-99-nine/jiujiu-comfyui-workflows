@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--
+  三格条漫模板（manga strip）—— 2026-08 芭蕾少女·走光三幕 / 主人的奖励晚餐 验证
+  用法：
+  1. 底图按格号命名为 manga_p1/p2/p3.png（或改下方 img src）
+  2. body 宽高 = 画布尺寸：宽 = 底图宽 + 左右边距；高 = 标题区 + N×底图高 + (N-1)×缝 + 底部区
+  3. 每格底部/顶部留白放对白气泡；拟声词放图内空白处
+  4. Edge headless 截图时 --window-size 必须等于 body 尺寸
+  5. 交付文件名用有意义中文名（主题+日期）
+  嵌字要点：对白贴角色心理（羞耻/惊慌/服从）；拟声词用日式（パサッ/じゅわ/ぴくん）加粗斜置+黑描边；
+  旁白条深色半透明+金色左线；R-18 内容加刊头（R-18/深夜特供/仅限成人）。
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:1648px; height:3448px; overflow:hidden; background:#191920; font-family:"Microsoft YaHei","PingFang SC",sans-serif; }
+  .manga { width:1648px; height:3448px; background:#191920; padding:0 56px; }
+
+  /* ===== 标题区（高 170）===== */
+  .head { height:170px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .head .kikan { font-size:15px; letter-spacing:6px; color:#e8b84b; margin-bottom:10px; }
+  .head .kikan span { color:#8a8a95; margin:0 8px; }
+  .head h1 { font-size:46px; color:#fff; letter-spacing:10px; font-weight:900; }
+  .head .sub { margin-top:8px; font-size:17px; color:#9a9aa8; letter-spacing:4px; }
+
+  /* ===== 漫画格：白边黑底，每格 1536×1016 ===== */
+  .panel { position:relative; width:1536px; height:1016px; background:#000; border:5px solid #fff; overflow:hidden; margin:0 auto; }
+  .panel img { display:block; width:1536px; height:1016px; }
+  .gap { height:60px; }
+
+  /* ===== 对白气泡：白底黑粗边+尾巴，尾巴用双三角（黑边+白芯） ===== */
+  .balloon { position:absolute; background:#fff; color:#111; border:3px solid #111; border-radius:16px;
+    padding:14px 20px; font-size:26px; font-weight:700; line-height:1.45;
+    box-shadow:4px 5px 0 rgba(0,0,0,.45); max-width:640px; }
+  .balloon::after { content:""; position:absolute; width:0; height:0; border-style:solid; }
+  .b-top-right { top:34px; right:40px; }
+  .b-top-right::after { right:52px; bottom:-20px; border-width:20px 14px 0 14px; border-color:#111 transparent transparent transparent; }
+  .b-top-right .tail { position:absolute; right:56px; bottom:-13px; width:0; height:0; border-style:solid; border-width:13px 10px 0 10px; border-color:#fff transparent transparent transparent; }
+  .b-bottom-left { left:40px; bottom:36px; }
+  .b-bottom-left::after { left:60px; top:-20px; border-width:0 14px 20px 14px; border-color:transparent transparent #111 transparent; }
+  .b-bottom-left .tail { position:absolute; left:64px; top:-13px; width:0; height:0; border-style:solid; border-width:0 10px 13px 10px; border-color:transparent transparent #fff transparent; }
+
+  /* ===== 拟声词：大号斜置+黑白描边 ===== */
+  .fx { position:absolute; font-weight:900; line-height:1; transform:rotate(-8deg); color:#fff;
+    -webkit-text-stroke:3px #111; text-shadow:3px 3px 0 #111; }
+
+  /* ===== 小旁白条 ===== */
+  .note { position:absolute; background:rgba(17,17,17,.72); color:#ffe9c9; font-size:17px; letter-spacing:2px;
+    padding:8px 16px; border-radius:8px; border-left:4px solid #e8b84b; }
+
+  /* ===== 底部签名区（高 110）===== */
+  .foot { height:110px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .foot .sign { font-size:20px; color:#e8b84b; letter-spacing:4px; font-weight:700; }
+  .foot .small { margin-top:6px; font-size:13px; color:#7a7a88; letter-spacing:3px; }
+</style>
+</head>
+<body>
+<div class="manga">
+
+  <!-- 标题 -->
+  <div class="head">
+    <div class="kikan">VOL.1 <span>◆</span> 深夜特供 <span>◆</span> R-18 内容</div>
+    <h1>主标题（每单自拟）</h1>
+    <div class="sub">副标题 · 每单自拟</div>
+  </div>
+
+  <!-- 格1 -->
+  <div class="panel">
+    <img src="YOUR_IMAGE_PATH">
+    <div class="fx" style="top:180px;left:60px;font-size:88px;">パサッ！</div>
+    <div class="balloon b-top-right">对白一<div class="tail"></div></div>
+    <div class="note" style="right:40px;bottom:34px;">旁白一</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- 格2 -->
+  <div class="panel">
+    <img src="YOUR_IMAGE_PATH">
+    <div class="fx" style="top:60px;right:560px;font-size:72px;transform:rotate(5deg);">じゅわ……</div>
+    <div class="balloon b-bottom-left">对白二<div class="tail"></div></div>
+    <div class="note" style="right:40px;bottom:34px;">旁白二</div>
+  </div>
+
+  <div class="gap"></div>
+
+  <!-- 格3 -->
+  <div class="panel">
+    <img src="YOUR_IMAGE_PATH">
+    <div class="fx" style="bottom:70px;right:70px;font-size:64px;transform:rotate(-12deg);">ぴくんっ！</div>
+    <div class="balloon b-top-right">对白三<div class="tail"></div></div>
+    <div class="note" style="left:40px;bottom:34px;">旁白三</div>
+  </div>
+
+  <!-- 底部 -->
+  <div class="foot">
+    <div class="sign">制作人：作者 · 出品</div>
+    <div class="small">三コマ・完 ｜ 仅限成人读者</div>
+  </div>
+
+</div>
+</body>
+</html>
