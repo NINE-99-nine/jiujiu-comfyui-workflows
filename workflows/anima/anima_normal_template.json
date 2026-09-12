@@ -152,6 +152,15 @@
       "title": "GGUF CLIP Loader"
     }
   },
+  "14": {
+    "inputs": {
+      "image": "140024_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
   "15": {
     "inputs": {
       "aspect_ratio": "original",
@@ -162,11 +171,31 @@
       "round_to_multiple": "8",
       "scale_to_side": "longest",
       "scale_to_length": 1440,
-      "background_color": "#000000"
+      "background_color": "#000000",
+      "image": [
+        "14",
+        0
+      ]
     },
     "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
     "_meta": {
       "title": "图层工具：按宽高比缩放 V2"
+    }
+  },
+  "16": {
+    "inputs": {
+      "pixels": [
+        "15",
+        0
+      ],
+      "vae": [
+        "17",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE编码"
     }
   },
   "17": {
@@ -180,8 +209,8 @@
   },
   "19": {
     "inputs": {
-      "width": 1024,
-      "height": 1536
+      "width": 768,
+      "height": 1024
     },
     "class_type": "ResolutionMasterSimplify",
     "_meta": {
@@ -190,7 +219,7 @@
   },
   "21": {
     "inputs": {
-      "seed": 394197152939345,
+      "seed": 558854051284954,
       "steps": [
         "68",
         1
@@ -239,7 +268,7 @@
   },
   "40": {
     "inputs": {
-      "filename_prefix": "2026-08-18/162529",
+      "filename_prefix": "2026-09-06/223450",
       "images": [
         "344",
         0
@@ -261,7 +290,7 @@
         0
       ],
       "input_2": [
-        "15",
+        "16",
         0
       ]
     },
@@ -276,7 +305,7 @@
         "version": 1,
         "textWidgetName": "text"
       },
-      "text": "<lora:sky02Lightv3:1.00> <lora:anima-base-1-masterpiece-v51:1.00> <lora:anima_context_detailer_base10:0.60> <lora:gpt-image-2_anima-base1_v1-1:1.00:1.00> <lora:far off in the morning haze024064645510a_30:0.80> <lora:Anima_in_real_update_v2_epoch_20:1.20> <lora:mixed_styles_anima-base1_v5:1.00>",
+      "text": "<lora:sky02Lightv3:1.00> <lora:anima-base-1-masterpiece-v51:1.00> <lora:anima_context_detailer_base10:0.70> <lora:gpt-image-2_anima-base1_v1-1:1.00:1.00> <lora:far off in the morning haze024064645510a_30:0.80> <lora:Anima_in_real_update_v2_epoch_20:1.20> <lora:mixed_styles_anima-base1_v5:1.00> <lora:animeoutlineV4_16:1.30>",
       "loras": {
         "__value__": [
           {
@@ -285,14 +314,16 @@
             "active": true,
             "expanded": false,
             "clipStrength": 1,
+            "selected": false,
             "locked": false
           },
           {
             "name": "anima_context_detailer_base10",
-            "strength": "0.60",
+            "strength": "0.70",
             "active": true,
             "expanded": false,
-            "clipStrength": "0.60",
+            "clipStrength": "0.70",
+            "selected": false,
             "locked": false
           },
           {
@@ -301,6 +332,7 @@
             "active": true,
             "expanded": false,
             "clipStrength": 1,
+            "selected": true,
             "locked": false
           },
           {
@@ -309,6 +341,7 @@
             "active": false,
             "expanded": false,
             "clipStrength": "1.00",
+            "selected": false,
             "locked": false
           },
           {
@@ -317,6 +350,7 @@
             "active": false,
             "expanded": false,
             "clipStrength": "0.80",
+            "selected": false,
             "locked": false
           },
           {
@@ -325,6 +359,7 @@
             "active": false,
             "expanded": false,
             "clipStrength": "1.20",
+            "selected": false,
             "locked": false
           },
           {
@@ -333,6 +368,16 @@
             "active": false,
             "expanded": false,
             "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "animeoutlineV4_16",
+            "strength": 1.3,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1.3,
+            "selected": false,
             "locked": false
           }
         ]
@@ -504,7 +549,7 @@
   },
   "344": {
     "inputs": {
-      "seed": 1344063581,
+      "seed": 1570918333,
       "resolution": 1600,
       "max_resolution": 3140,
       "batch_size": 1,

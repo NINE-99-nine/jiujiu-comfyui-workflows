@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "filename_prefix": "audio/2026-08-25/011808",
+      "filename_prefix": "audio/voxcpm/2026-09-05/195906",
       "audio": [
         "4",
         0
@@ -15,16 +15,16 @@
   "4": {
     "inputs": {
       "model_name": "VoxCPM2",
-      "work_mode": "可控克隆",
+      "work_mode": "极致克隆",
       "control_instruction": "年轻的英国贵族少女，声音优雅而冷清，仿佛在朗读文学作品",
-      "target_text": "我找到了工作目录里的\"灵魂\"配置文件。不过它是个 .yml 文件不是 .md，就在你挂载的 dogma-preset 里。让我顺便找到官方直接自带的 standard 预设的默认自我认知，方便给你对比。",
+      "target_text": "",
       "speaker_count": 3,
       "show_advanced": true,
       "cfg_value": 2,
       "inference_steps": 10,
-      "seed": 184692569466983,
+      "seed": 422496736415406,
       "ui_language": "中文",
-      "lora_name": "shorekeeper_20260729_114945.safetensors",
+      "lora_name": "浊心斯卡蒂_20260901_223158.safetensors",
       "force_offload": false,
       "auto_asr": true,
       "reference_text": "",
@@ -53,10 +53,10 @@
   },
   "33": {
     "inputs": {
-      "voice_name": "voices/铅玻璃.mp3",
-      "reference_text": "The melody-like sound of rain drops on the window is always here, accompanying me through the long long night.",
+      "voice_name": "voices/浊心斯卡蒂.mp3",
+      "reference_text": "夢……あなたはどんな夢を見るのかしら？あなたは今、どこにいるの？その場所も……一つの夢なの？",
       "trim_start": 0,
-      "trim_end": 11.77,
+      "trim_end": 18.36,
       "customized": false
     },
     "class_type": "CharacterVoicesNode",
