@@ -11,7 +11,7 @@ import http.server
 import urllib.parse
 
 # 技能库工作流归档根目录（所有工作流副本平铺/分子目录存放于此）
-WF_DIR = r'os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'workflows')'
+WF_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'workflows') + os.sep
 
 class Handler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):

@@ -165,7 +165,7 @@ html-embedding/
 
 - 底图 1536×1016 模板自动缩 2/3 → 1024×677；对白条 56px 高，单条 ≤18 字
 - 中文字体用 C:/Windows/Fonts/msyh.ttc（只读，不写入 C 盘）
-- 剧情型批量图：每格对白按剧情递进写（调戏→反转→侵犯→收尾），统一 (nsfw:1.4) 定调
+- 剧情型批量图：每格对白按剧情递进写，全篇定调统一
 
 ## 防溢出技巧（poster5 教训：左下角文字被挤出画面）
 
@@ -210,7 +210,7 @@ html-embedding/
 - `scripts/manga_panel.py` — 批量拼版脚本（10+ 格级用）
 - `references/character-tags.md` — 本机 IP 角色串速查（BA/鸣潮/OC 词条）
 - `references/multi-panel-manga.md` — 多格漫画批量流程
-- `_archive/` — 历史参考（anima-nsfw-prompting/anima-prompt-essentials/session-notes 等，不再引用）
+- `_archive/` — 历史参考（不再引用）
 
 ## 验证清单
 

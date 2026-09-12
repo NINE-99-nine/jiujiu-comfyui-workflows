@@ -288,4 +288,4 @@ anima 工作流通过 GroupIgnoreManager 逻辑门切换两种模式（**正常�
 ## 版本日志
 
 - v3.0（2026-08-18）：并入原 prompting.md 提示词书写总纲，guide 与 prompting 两文件合一
-- v1.0：整合 anima-prompt-rules.md（六层结构 v1.1）+ anime-nsfw-prompting（张力引擎/定调词/若隐若现）+ anime-multi-character-prompting（多人结构/触发词来源）→ 统一收纳于本总纲（2026-08-09）
+- v1.0：整合 anima-prompt-rules.md（六层结构 v1.1）+ anime-multi-character-prompting（多人结构/触发词来源）→ 统一收纳于本总纲（2026-08-09）
