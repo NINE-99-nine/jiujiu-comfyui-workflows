@@ -44,10 +44,10 @@ jiujiu-comfyui-workflows/
 │   │   ├── krea2汇总_api.json/.py   ← 唯一合法 API 模板 + 引子
 │   │   └── krea2汇总.json    ← 固定副本（UI 格式）
 │   ├── moss/                 ← 🎨 MOSS-Image 生图（8 步 dmd ＋ **LoRA 堆 6 条** ＋ **SeedVR2 放大 1440**；Caption / Layout 两种提示词）
-│   │   ├── guide.md          ← 使用守则（只有两个旋钮：提示词 + 分辨率）
+│   │   ├── guide.md          ← 使用守则（两份副本分工 / UI 版结构 / 可改节点 / LoRA / 放大链 / 分辨率）
 │   │   ├── prompting.md      ← 提示词原则（Caption 散文 / Layout 像素框，二选一）
 │   │   ├── moss_api.json/.py ← API 模板（**21 节点**）+ 引子（--loras / --seedvr2-res / --list-loras）
-│   │   └── prompting.md      ← 提示词原则（Caption 散文 / Layout 像素框，二选一）
+│   │   └── moss_image.json   ← UI 副本（**28 节点 / 5 分组**，手动开图用；主线 euler，旁线 er_sde 默认旁路）
 │   ├── qwen_image2.1/        ← 🎨 Qwen-Image 2.1 生图（**临时**；无图=文生图 / 有图=编辑，多图参考）
 │   │   ├── guide.md          ← 使用守则（节点地图 / 两用开关 / 多图机制 / 引子参数 / Pitfalls）
 │   │   ├── prompting.md      ← 提示词编写指南（五段骨架 / 写实vs二次元 / 编辑写法 / 文字渲染 / 翻车对照）
@@ -93,6 +93,7 @@ jiujiu-comfyui-workflows/
 | 「用 anima 画 XX」/ 正常图 / NSFW 图 / 多人图 | `workflows/anima/guide.md` |
 | 「用 krea2 画 XX」/ krea2 生图 | `workflows/krea2/guide.md` |
 | 「用 MOSS 画 XX」/ MOSS-Image 生图（caption / 精确文字版式；**带 LoRA 与 SeedVR2 放大**） | `workflows/moss/guide.md` |
+| 「我要自己在 ComfyUI 里跑 MOSS」/ 看 MOSS 的 UI 结构 | `workflows/moss/moss_image.json` ＋ guide 的「UI 版结构」节 |
 | 「用 z image 画 XX」（中文提示词/大宽图/巨构） | `workflows/zimage/guide.md` |
 | 「用 qwen_image 2.1 画 XX」/ 拿参考图编辑（临时子技能） | `workflows/qwen_image2.1/guide.md` |
 | 「换个画风/换个风格/换个 lora」 | `workflows/anima/guide.md` → **画风选择规则**（clarify 选择题 A/B/C…，默认 gpt-image-2） |

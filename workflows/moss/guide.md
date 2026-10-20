@@ -1,11 +1,25 @@
-# MOSS-Image 子技能 · 使用守则（guide v2.0）
+# MOSS-Image 子技能 · 使用守则（guide v2.1）
 
-> 与 `moss_api.json`（固定副本）＋ `moss_api.py`（引子）配套。出图一律用本目录副本，不用原件。
+> 与 `moss_image.json`（**UI 版，手动用**）＋ `moss_api.json`（API 固定副本）＋ `moss_api.py`（引子）配套。出图一律用本目录副本，不用原件。
+
+## 两份副本，分工不同
+
+| | `moss_image.json` | `moss_api.json` |
+|---|---|---|
+| 格式 | ComfyUI **UI 工作流**（`nodes` / `links` / `groups`） | **API 格式**（`class_type`） |
+| 节点 | **28**，5 个分组 | 21 |
+| 大小 | 50.9 KB | 7.6 KB |
+| 谁用 | **作者手动开图**（拖进 ComfyUI，点 Run） | **agent 走引子**（`moss_api.py` 提交） |
+| 出图线 | 双线：主线 `euler` ＋ 旁线 `er_sde`（默认**旁路**） | 单线 `er_sde` |
+
+🔴 **两条线的采样器不同**：UI 版主线 `90 KSampler` 是 **euler**，API 版 `19` 是 **er_sde**。同一提示词同一 seed，两边出来的质感会有差别——复刻某张图时先确认当初是哪条线跑的。
 
 ## 副本信息
 
 | 项 | 值 |
 |---|---|
+| UI 版 | `workflows/moss/moss_image.json`（**28 节点**，5 分组，50.9 KB，2026-10-21 入库） |
+| UI 版来源 | 作者在 ComfyUI 导出：`<your_data_dir>\AI\AI生成的优秀案例\AI绘画优秀案例\MOSS-Image（副本）.json` |
 | 固定副本 | `workflows/moss/moss_api.json`（API 格式，**21 节点**，7.6 KB） |
 | 归档校验 | MD5 `da1e5be4b1e4388ed08c81cbbd992249`（**2026-10-20 v2 入库**） |
 | 来源 | 作者在 ComfyUI 导出：`<your_data_dir>\AI\AI生成的优秀案例\AI绘画优秀案例\MOSS-Image_API.json` |
@@ -17,6 +31,25 @@
 | 提示词入口 | [99]String → [101]JoinStringMulti（串 1 接 [93] 的触发词输出）→ [4] 正向 CLIPTextEncode |
 
 **实测（2026-10-20 v2 首跑）**：输入 3:4 / 1.2MP（960×1280）→ 成品 **1440×1912**。放大链确认生效（若退回原图档就是 960×1280）。
+
+## UI 版结构（`moss_image.json`，28 节点 / 5 分组）
+
+| 分组 | 内容 |
+|---|---|
+| **提示词** | `99 String`（提示词）＋ `98 String`（质量词，**旁路**）→ `101 JoinStringMulti`（8 路串接）→ `4` 正向 / `5` 负面 CLIPTextEncode |
+| **模型参数区** | `13 UNETLoader` ＋ `3 VAELoader` ＋ `2 CLIPLoader`（type=`moss_image`）＋ `61` dmd 蒸馏 LoRA（1.0）＋ `93 Lora Loader (LoraManager)` |
+| **一次出图** | 主线：`7 EmptyLatentImage` → `90 KSampler`（8 步 / cfg 1 / **euler** / simple）→ `22 VAEDecode`；旁线：`8 ResolutionSelector` → `19 KSampler`（**er_sde**）→ `102 VAEDecode` → `89`/`91 PreviewImage` |
+| **高清放大** | `92 VAEEncode` → `95 LatentUpscaleBy`（nearest-exact ×1.5） |
+| **seedvr2** | `79 SeedVR2LoadVAEModel`（`ema_vae_fp16`）＋ `80 SeedVR2LoadDiTModel`（`seedvr2_ema_3b-Q4_K_M.gguf` / xpu:0 / 32 blocks）→ `85 SeedVR2VideoUpscaler`（短边 1440，长边上限 2880）→ `81 SaveImage` |
+
+**默认旁路（mode=4）的节点**：`8` `19` `91` `92` `95` `98` `102` `104 Raffle`。
+也就是说**开箱即用的那条线**是：`7 EmptyLatentImage`（1024×1024）→ `90 KSampler`（euler）→ `22 VAEDecode` → `103 AnySwitch` → `85 SeedVR2` → `81 SaveImage`。
+
+**要换回"分辨率选择器"那条线**：把 `8` 与 `19` 解除旁路、把 `7` 与 `90` 旁路掉，并确认 `103 AnySwitch` 的输入指向 `102`（或 `22`，视要不要走放大）。
+
+**`96 GroupIgnoreManager`**：一键忽略指定分组的节点（试参数时用来快速关掉放大组，比逐个旁路快）。
+
+**`104 Raffle`**（默认旁路）：随机抽 LoRA 的探索节点，作者试过没留用；不要自行启用。
 
 ## 可改节点（作者划定）
 
@@ -121,5 +154,6 @@ python workflows/moss/moss_api.py --prompt-file 词.txt --ratio "2:3 (Portrait P
 
 ## 版本日志
 
+- **v2.1（2026-10-21）**：补入 **UI 版 `moss_image.json`**（28 节点 / 5 分组 / 50.9 KB），来源 `MOSS-Image（副本）.json`；新增「两份副本分工」与「UI 版结构」两节。要点：UI 版主线是 `90 KSampler`（**euler**）＋ `7 EmptyLatentImage` 1024²，另有一条 `8 ResolutionSelector` → `19 KSampler`（**er_sde**）的旁线（默认旁路）；`95 LatentUpscaleBy` / `92 VAEEncode` / `98 质量词` / `104 Raffle` 亦为旁路。API 版仍是单线 `er_sde`，**两边质感会有差别**。
 - **v2.0（2026-10-20）**：作者新建带 LoRA 堆 ＋ SeedVR2 放大的版本，21 节点。引子重写：提示词改注入 `99.String`（`101` 把 `93` 的触发词自动拼在前面）、保存改 `81`、LoRA 改 `93.loras[]`、新增 `--loras` / `--no-default-lora` / `--list-loras` / `--seedvr2-res` / `--no-upscale`；采样器从 `euler` 变 `er_sde`；引子给两个 AnySwitch 兜底补 `switch=True`。实测 3:4/1.2MP → 1440×1912。
 - v1.0（2026-10-19）：首版，13 节点、无放大链、只有提示词与分辨率两个旋钮。
