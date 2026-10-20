@@ -1,0 +1,464 @@
+{
+  "1": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "2": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "628",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": [
+        "633",
+        0
+      ],
+      "clip": [
+        "101",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "正面提示词"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "泛黄，发绿，模糊，低分辨率，低质量图像，扭曲的肢体，诡异的外观，丑陋，AI感，噪点，网格感，JPEG压缩条纹，异常的肢体，水印，乱码，意义不明的字符，泛蓝,模糊，低分辨率，畸形，多余的肢体，手的结构错误，卡通，插画，文字，水印，logo，过度曝光，曝光不足，平光，生硬的阴影，面部丑陋，比例失调，手指畸形，眼睛畸形，耳朵畸形，鼻子畸形，嘴巴畸形，牙齿畸形，头发杂乱，衣服褶皱不自然，背景杂乱，构图混乱，透视错误，景深错误，对焦模糊，色彩失真，对比度低，饱和度低，质感差，塑料感，不真实。",
+      "clip": [
+        "101",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "负面提示词"
+    }
+  },
+  "10": {
+    "inputs": {
+      "width": [
+        "625",
+        3
+      ],
+      "height": [
+        "625",
+        4
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "12": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": [
+        "546",
+        0
+      ],
+      "steps": [
+        "104",
+        0
+      ],
+      "cfg": 2,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "start_at_step": 0,
+      "end_at_step": [
+        "105",
+        0
+      ],
+      "return_with_leftover_noise": "enable",
+      "model": [
+        "2",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "630",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "1-base"
+    }
+  },
+  "13": {
+    "inputs": {
+      "add_noise": "disable",
+      "noise_seed": 819059899577763,
+      "steps": [
+        "104",
+        0
+      ],
+      "cfg": 1,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "start_at_step": [
+        "105",
+        0
+      ],
+      "end_at_step": [
+        "104",
+        0
+      ],
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "666",
+        0
+      ],
+      "positive": [
+        "5",
+        0
+      ],
+      "negative": [
+        "16",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "2-turbo"
+    }
+  },
+  "16": {
+    "inputs": {
+      "conditioning": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "条件零化"
+    }
+  },
+  "19": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "628",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "采样算法（AuraFlow）"
+    }
+  },
+  "35": {
+    "inputs": {
+      "filename_prefix": "2026-08-19/140024",
+      "images": [
+        "660",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "101": {
+    "inputs": {
+      "clip_name": "Z-Image-Engineer-V6-Q8_0.gguf",
+      "type": "lumina2"
+    },
+    "class_type": "CLIPLoaderGGUF",
+    "_meta": {
+      "title": "CLIPLoader (GGUF)"
+    }
+  },
+  "104": {
+    "inputs": {
+      "value": 9
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "INT Constant"
+    }
+  },
+  "105": {
+    "inputs": {
+      "value": 3
+    },
+    "class_type": "INTConstant",
+    "_meta": {
+      "title": "INT Constant"
+    }
+  },
+  "546": {
+    "inputs": {
+      "seed": 478072319888732
+    },
+    "class_type": "easy seed",
+    "_meta": {
+      "title": "随机种"
+    }
+  },
+  "572": {
+    "inputs": {
+      "image": "48E1B87165EE41FFC915702595E394E5.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "625": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "longest",
+      "scale_to_length": 1440,
+      "background_color": "#000000",
+      "image": [
+        "572",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "图层工具：按宽高比缩放 V2"
+    }
+  },
+  "628": {
+    "inputs": {
+      "__lm_autocomplete_meta_text": {
+        "version": 1,
+        "textWidgetName": "text"
+      },
+      "text": "<lora:skin texture Photorealistic style v4.5:0.50> <lora:Comics_Factory_V6T1_E10:0.85> <lora:NSFW_master_ZIT_000017532:0.80> <lora:Z-Detail-Slider:1.50> <lora:Z-Detail-Slider:1.50>",
+      "loras": {
+        "__value__": [
+          {
+            "name": "skin texture Photorealistic style v4.5",
+            "strength": "0.50",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "0.50",
+            "locked": false
+          },
+          {
+            "name": "Comics_Factory_V6T1_E10",
+            "strength": "0.85",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "0.85",
+            "locked": false
+          },
+          {
+            "name": "NSFW_master_ZIT_000017532",
+            "strength": "0.80",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "0.80",
+            "locked": false
+          },
+          {
+            "name": "Z-Detail-Slider",
+            "strength": "1.50",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "1.50",
+            "locked": false
+          }
+        ]
+      },
+      "model": [
+        "666",
+        0
+      ]
+    },
+    "class_type": "Lora Loader (LoraManager)",
+    "_meta": {
+      "title": "Lora Loader (LoraManager)"
+    }
+  },
+  "629": {
+    "inputs": {
+      "width": 768,
+      "height": 1024
+    },
+    "class_type": "ResolutionMasterSimplify",
+    "_meta": {
+      "title": "分辨率大师简化版 (Resolution Master Simplify)"
+    }
+  },
+  "630": {
+    "inputs": {
+      "selection_setting": 1,
+      "input_1": [
+        "631",
+        0
+      ],
+      "input_2": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "TwoWaySwitch",
+    "_meta": {
+      "title": "Switch (Two Way)"
+    }
+  },
+  "631": {
+    "inputs": {
+      "width": [
+        "629",
+        0
+      ],
+      "height": [
+        "629",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "632": {
+    "inputs": {
+      "value": [
+        "628",
+        2
+      ]
+    },
+    "class_type": "PrimitiveString",
+    "_meta": {
+      "title": "字符串"
+    }
+  },
+  "633": {
+    "inputs": {
+      "inputcount": 8,
+      "delimiter": "",
+      "return_list": false,
+      "Update inputs": null,
+      "string_1": [
+        "632",
+        0
+      ],
+      "string_3": [
+        "636",
+        0
+      ]
+    },
+    "class_type": "JoinStringMulti",
+    "_meta": {
+      "title": "Join String Multi"
+    }
+  },
+  "636": {
+    "inputs": {
+      "value": "A stunning young maiden with snow-white hair and vivid crimson eyes. Her side braids are neatly tied with red strings, and the rest of her hair flows down to her waist. She is wearing a white long-sleeved summer shirt featuring vertical stripes, adorned with a gradient of black ribbon bows from large to small running down from her collarbone to her ribs. A single, fluffy ruffled frill adorns the right chest of the shirt. She pairs it with a high-waisted pleated skirt designed in a classic black and white checkered pattern, complemented by classic Mary Jane shoes and thick black pantyhose. (red hair ribbons:1.1), (white_hair:1.8), (black and white checkered pattern:1.2), (high-waisted pleated skirt)."
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "644": {
+    "inputs": {
+      "unet_name": "z image\\z-image-turbo-Q8_0.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "657": {
+    "inputs": {
+      "anything": [
+        "660",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "清理显存占用"
+    }
+  },
+  "658": {
+    "inputs": {
+      "clean_file_cache": true,
+      "clean_processes": true,
+      "clean_dlls": true,
+      "retry_times": 3,
+      "anything": [
+        "660",
+        0
+      ]
+    },
+    "class_type": "RAMCleanup",
+    "_meta": {
+      "title": "🎈RAM-Cleanup"
+    }
+  },
+  "660": {
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8,
+      "samples": [
+        "13",
+        0
+      ],
+      "vae": [
+        "1",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "VAE解码（分块）"
+    }
+  },
+  "666": {
+    "inputs": {
+      "unet_name": "z image\\z_image_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  }
+}

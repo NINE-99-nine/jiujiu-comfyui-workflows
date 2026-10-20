@@ -1,0 +1,31 @@
+# ========== skill 工作版 .gitignore ==========
+# ⚠️ 本仓库为【本地版本管理】——绝不设置 remote、绝不推远程。
+#    只有 <profile_dir>\publish\ 那个发布版才允许远端同步。
+
+# 本地备份痕迹（git 历史已取代，不再需要）
+*.bak_*
+*.bak
+
+# Python 缓存
+__pycache__/
+*.pyc
+*.pyo
+
+# 运行产物 / 临时
+*.log
+tmp/
+_work/
+output/
+*.db
+*.db-shm
+*.db-wal
+
+# 系统/编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# 本机配置与构建缓存（发布构建器的中间产物，不属于源码）
+config.yaml
+.build_cache.json

@@ -1,0 +1,475 @@
+{
+  "1300": {
+    "inputs": {
+      "group_mode": true,
+      "default_active": true,
+      "allow_strength_adjustment": false,
+      "toggle_trigger_words": {
+        "__value__": []
+      },
+      "orinalMessage": ""
+    },
+    "class_type": "TriggerWord Toggle (LoraManager)",
+    "_meta": {
+      "title": "TriggerWord Toggle (LoraManager)"
+    }
+  },
+  "1301": {
+    "inputs": {
+      "value": ""
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "1303": {
+    "inputs": {
+      "inputcount": 4,
+      "delimiter": " ",
+      "return_list": false,
+      "Update inputs": null,
+      "string_1": [
+        "1300",
+        0
+      ],
+      "string_2": [
+        "1301",
+        0
+      ]
+    },
+    "class_type": "JoinStringMulti",
+    "_meta": {
+      "title": "Join String Multi"
+    }
+  },
+  "1304": {
+    "inputs": {
+      "conditioning": [
+        "1305",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "条件零化"
+    }
+  },
+  "1305": {
+    "inputs": {
+      "text": [
+        "1303",
+        0
+      ],
+      "clip": [
+        "1333",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "1306": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024
+    },
+    "class_type": "ResolutionMasterSimplify",
+    "_meta": {
+      "title": "分辨率大师简化版 (Resolution Master Simplify)"
+    }
+  },
+  "1307": {
+    "inputs": {
+      "width": [
+        "1306",
+        0
+      ],
+      "height": [
+        "1306",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "空Latent图像（Flux2）"
+    }
+  },
+  "1309": {
+    "inputs": {
+      "index": 0,
+      "image0": [
+        "1320",
+        0
+      ]
+    },
+    "class_type": "easy imageIndexSwitch",
+    "_meta": {
+      "title": "图像编号切换"
+    }
+  },
+  "1310": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 1.25,
+      "resolution_steps": 1,
+      "image": [
+        "1309",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "缩放图像（像素）"
+    }
+  },
+  "1311": {
+    "inputs": {
+      "image": [
+        "1310",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "获取图像尺寸"
+    }
+  },
+  "1312": {
+    "inputs": {
+      "width": [
+        "1311",
+        0
+      ],
+      "height": [
+        "1311",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyFlux2LatentImage",
+    "_meta": {
+      "title": "空Latent图像（Flux2）"
+    }
+  },
+  "1313": {
+    "inputs": {
+      "seed": 319696057754329,
+      "steps": 6,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "1333",
+        0
+      ],
+      "positive": [
+        "1319:741",
+        0
+      ],
+      "negative": [
+        "1319:739",
+        0
+      ],
+      "latent_image": [
+        "1314",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "1314": {
+    "inputs": {
+      "select": 2,
+      "latent_1": [
+        "1312",
+        0
+      ],
+      "latent_2": [
+        "1307",
+        0
+      ]
+    },
+    "class_type": "Latent Switch (JPS)",
+    "_meta": {
+      "title": "Latent Switch (JPS)"
+    }
+  },
+  "1320": {
+    "inputs": {
+      "aspect_ratio": "original",
+      "proportional_width": 1,
+      "proportional_height": 1,
+      "fit": "letterbox",
+      "method": "lanczos",
+      "round_to_multiple": "8",
+      "scale_to_side": "longest",
+      "scale_to_length": 1024,
+      "background_color": "#000000",
+      "image": [
+        "1326",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageScaleByAspectRatio V2",
+    "_meta": {
+      "title": "图层工具：按宽高比缩放 V2"
+    }
+  },
+  "1321": {
+    "inputs": {
+      "images": [
+        "1324",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "1322": {
+    "inputs": {
+      "clean_file_cache": true,
+      "clean_processes": true,
+      "clean_dlls": true,
+      "retry_times": 3,
+      "anything": [
+        "1338",
+        0
+      ]
+    },
+    "class_type": "RAMCleanup",
+    "_meta": {
+      "title": "🎈RAM-Cleanup"
+    }
+  },
+  "1323": {
+    "inputs": {
+      "anything": [
+        "1326",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "清理显存占用"
+    }
+  },
+  "1324": {
+    "inputs": {
+      "tile_size": 512,
+      "overlap": 64,
+      "temporal_size": 64,
+      "temporal_overlap": 8,
+      "samples": [
+        "1313",
+        0
+      ],
+      "vae": [
+        "1338",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled",
+    "_meta": {
+      "title": "VAE解码（分块）"
+    }
+  },
+  "1325": {
+    "inputs": {
+      "filename_prefix": "2026-08-31/234627",
+      "images": [
+        "1324",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "1326": {
+    "inputs": {
+      "image": "1768958479582.jpeg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "1329": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_uztmo_00001_.png&type=temp&subfolder=&rand=0.771082524745645"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_uztmo_00002_.png&type=temp&subfolder=&rand=0.2294399431113614"
+          }
+        ]
+      },
+      "image_a": [
+        "1324",
+        0
+      ],
+      "image_b": [
+        "1326",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "1330": {
+    "inputs": {
+      "unet_name": "flux\\flux-2-klein-9b-Q4_K_M.gguf"
+    },
+    "class_type": "UnetLoaderGGUF",
+    "_meta": {
+      "title": "Unet Loader (GGUF)"
+    }
+  },
+  "1331": {
+    "inputs": {
+      "unet_name": "flux\\Flux2-Klein-9B-int4-ConvRot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "1332": {
+    "inputs": {
+      "clip_name": "Qwen3-8B-int4-ConvRot.safetensors",
+      "type": "flux2",
+      "device": "default"
+    },
+    "class_type": "ClipLoaderGGUF",
+    "_meta": {
+      "title": "GGUF CLIP Loader"
+    }
+  },
+  "1333": {
+    "inputs": {
+      "__lm_autocomplete_meta_text": {
+        "version": 1,
+        "textWidgetName": "text"
+      },
+      "text": "<lora:flux-2-klein-NSFW:0.80> <lora:Klein_9B-一致性consis:0.35>",
+      "loras": {
+        "__value__": [
+          {
+            "name": "flux-2-klein-NSFW",
+            "strength": "0.80",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "0.80",
+            "locked": false
+          },
+          {
+            "name": "Klein_9B-一致性consis",
+            "strength": "0.35",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "0.35",
+            "locked": false
+          }
+        ]
+      },
+      "model": [
+        "1330",
+        0
+      ],
+      "clip": [
+        "1332",
+        0
+      ]
+    },
+    "class_type": "Lora Loader (LoraManager)",
+    "_meta": {
+      "title": "9b模型的lora"
+    }
+  },
+  "1338": {
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "1339": {
+    "inputs": {
+      "gmm_ui": ""
+    },
+    "class_type": "GroupIgnoreManager",
+    "_meta": {
+      "title": "组忽略管理器 (Group Ignore Manager)"
+    }
+  },
+  "1319:739": {
+    "inputs": {
+      "conditioning": [
+        "1304",
+        0
+      ],
+      "latent": [
+        "1319:740",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "参考Latent"
+    }
+  },
+  "1319:740": {
+    "inputs": {
+      "pixels": [
+        "1320",
+        0
+      ],
+      "vae": [
+        "1338",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE编码"
+    }
+  },
+  "1319:741": {
+    "inputs": {
+      "conditioning": [
+        "1305",
+        0
+      ],
+      "latent": [
+        "1319:740",
+        0
+      ]
+    },
+    "class_type": "ReferenceLatent",
+    "_meta": {
+      "title": "参考Latent"
+    }
+  }
+}

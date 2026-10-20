@@ -1,0 +1,239 @@
+{
+  "563": {
+    "inputs": {
+      "image": "赛琳娜_贴纸海报群青底_库档长度_mix_横版大图_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "加载图像"
+    }
+  },
+  "567": {
+    "inputs": {
+      "images": [
+        "575",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "568": {
+    "inputs": {
+      "aspect_ratio": "9:16 (Portrait Widescreen)",
+      "megapixels": 2,
+      "multiple": 36
+    },
+    "class_type": "ResolutionSelector",
+    "_meta": {
+      "title": "分辨率选择器"
+    }
+  },
+  "569": {
+    "inputs": {
+      "filename_prefix": "2026-09-24/150710",
+      "format": "png",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB",
+      "images": [
+        "575",
+        0
+      ]
+    },
+    "class_type": "SaveImageAdvanced",
+    "_meta": {
+      "title": "保存图像（高级）"
+    }
+  },
+  "570": {
+    "inputs": {
+      "rgthree_comparer": {
+        "images": [
+          {
+            "name": "A",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_yuqco_00010_.png&type=temp&subfolder=&rand=0.912227327272393"
+          },
+          {
+            "name": "B",
+            "selected": true,
+            "url": "/api/view?filename=rgthree.compare._temp_yuqco_00011_.png&type=temp&subfolder=&rand=0.21281163384776003"
+          }
+        ]
+      },
+      "image_a": [
+        "575",
+        0
+      ],
+      "image_b": [
+        "563",
+        0
+      ]
+    },
+    "class_type": "Image Comparer (rgthree)",
+    "_meta": {
+      "title": "Image Comparer (rgthree)"
+    }
+  },
+  "571": {
+    "inputs": {
+      "unet_name": "qwen_image2.1\\qwen_image_2.1_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "572": {
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "573": {
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "574": {
+    "inputs": {
+      "width": [
+        "568",
+        0
+      ],
+      "height": [
+        "568",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "575": {
+    "inputs": {
+      "samples": [
+        "576",
+        0
+      ],
+      "vae": [
+        "573",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "576": {
+    "inputs": {
+      "seed": 944494119972870,
+      "steps": 20,
+      "cfg": 1,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "578",
+        0
+      ],
+      "positive": [
+        "579",
+        0
+      ],
+      "negative": [
+        "579",
+        1
+      ],
+      "latent_image": [
+        "577",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "577": {
+    "inputs": {
+      "switch": true,
+      "on_false": [
+        "579",
+        2
+      ],
+      "on_true": [
+        "574",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "切换"
+    }
+  },
+  "578": {
+    "inputs": {
+      "device": "auto",
+      "dtype": "default",
+      "model": [
+        "571",
+        0
+      ]
+    },
+    "class_type": "QwenImage21Cache",
+    "_meta": {
+      "title": "Qwen Image 2.1 Cache"
+    }
+  },
+  "579": {
+    "inputs": {
+      "prompt": [
+        "580",
+        0
+      ],
+      "negative_prompt": "",
+      "resolution": 1024,
+      "clip": [
+        "572",
+        0
+      ],
+      "images.image_1": [
+        "563",
+        0
+      ],
+      "vae": [
+        "573",
+        0
+      ]
+    },
+    "class_type": "TextEncodeQwenImage21",
+    "_meta": {
+      "title": "Text Encode Qwen Image 2.1"
+    }
+  },
+  "580": {
+    "inputs": {
+      "String": ""
+    },
+    "class_type": "String",
+    "_meta": {
+      "title": "String"
+    }
+  }
+}

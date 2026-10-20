@@ -1,0 +1,27 @@
+# ============ jiujiu-comfyui-workflows 配置模板 ============
+# 用法：复制本文件为 config.yaml，按自己的环境改。
+#   cp config.example.yaml config.yaml
+#
+# 所有工作流脚本都从 config.yaml 取值，改这一个文件就够，不用动任何 .py。
+# 想用环境变量覆盖也行（优先级高于本文件）：
+#   COMFYUI_URL / COMFYUI_INPUT_DIR / COMFYUI_MODELS_DIR
+#   COMFYUI_WORK_ROOT / COMFYUI_PROXY / COMFYUI_SERVE_PORT
+#
+# 写法：两空格缩进的两层 key: value，# 后面是注释。
+# 值里不要出现 # 号（会被当注释截断）。留空 = 用内置默认值。
+
+comfyui:
+  url: "http://127.0.0.1:8188"     # ComfyUI 基址（含端口）
+  input_dir: ""                    # 往 ComfyUI 塞图时的 input 目录，留空=不指定
+  models_dir: ""                   # ComfyUI models 目录，留空=不指定
+
+paths:
+  # 引子脚本把成品拷到这里，按 _work/<引子名>/ 分目录
+  # 留空 = 技能目录下的 _work/
+  work_root: ""
+
+network:
+  proxy: ""                        # 下载模型/访问外网时用的代理，如 http://127.0.0.1:7890；留空=直连
+
+misc:
+  serve_port: 8765                 # scripts/serve_wf.py 的端口

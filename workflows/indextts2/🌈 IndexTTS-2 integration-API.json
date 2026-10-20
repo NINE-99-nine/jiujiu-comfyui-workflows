@@ -1,0 +1,161 @@
+{
+  "47": {
+    "inputs": {
+      "text": [
+        "65",
+        0
+      ],
+      "narrator_voice": "voices/铅玻璃.mp3",
+      "seed": 3143965332,
+      "enable_chunking": true,
+      "max_chars_per_chunk": 400,
+      "chunk_combination_method": "auto",
+      "silence_between_chunks_ms": 100,
+      "enable_audio_cache": true,
+      "batch_size": 0,
+      "TTS_engine": [
+        "123",
+        0
+      ]
+    },
+    "class_type": "UnifiedTTSTextNode",
+    "_meta": {
+      "title": "🎤 TTS Text"
+    }
+  },
+  "50": {
+    "inputs": {
+      "source": [
+        "47",
+        1
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "预览任意"
+    }
+  },
+  "51": {
+    "inputs": {
+      "voice_name": "voices/铅玻璃.mp3",
+      "reference_text": "The melody-like sound of rain drops on the window is always here, accompanying me through the long long night.",
+      "trim_start": 0,
+      "trim_end": 11.77,
+      "customized": false
+    },
+    "class_type": "CharacterVoicesNode",
+    "_meta": {
+      "title": "🎭 Character Voices"
+    }
+  },
+  "65": {
+    "inputs": {
+      "value": "角色简介\n身份：海兰德铁道学园高一学生，隶属中央控制中心（CCC），与双胞胎姐姐橘光并称“铁道双子”。\n\n外貌：浅青柠色双马尾长发，金色眼眸，精灵尖耳，有淡绿色光环。\n\n性格：开朗活泼、爱捣蛋的“雌小鬼”，但在列车行驶相关事务上有强烈的责任感。\n\n其他：生日是6月14日，身高147cm。\n\n"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "默认输入节点"
+    }
+  },
+  "82": {
+    "inputs": {
+      "value": "On Tuesdays, the pigeons held parliament.\n[Alice:crestfallen_original] They debated the ethics of breadcrumbs and the metaphysics of flight. \n[Bob:Alice] One particularly philosophical pigeon named Thistle believed gravity was just a suggestion.\n[Cowboy:crestfallen_original] He once floated for three minutes straight, fueled by sheer conviction and a gust of rebellious wind."
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "字符串（多行）"
+    }
+  },
+  "123": {
+    "inputs": {
+      "model_path": "IndexTTS-2",
+      "device": "xpu",
+      "emotion_alpha": 0.7,
+      "use_random": false,
+      "max_text_tokens_per_segment": 120,
+      "interval_silence": 200,
+      "temperature": 0.8,
+      "top_p": 0.8,
+      "top_k": 30,
+      "do_sample": true,
+      "length_penalty": 0,
+      "num_beams": 1,
+      "repetition_penalty": 9.5,
+      "max_mel_tokens": 1500,
+      "use_fp16": true,
+      "use_deepspeed": true,
+      "use_cuda_kernel": "false",
+      "use_torch_compile": false,
+      "use_accel": false,
+      "stream_return": false,
+      "more_segment_before": 0,
+      "low_vram": false
+    },
+    "class_type": "IndexTTSEngineNode",
+    "_meta": {
+      "title": "⚙️ IndexTTS-2 Engine"
+    }
+  },
+  "124": {
+    "inputs": {
+      "qwen_model": "qwen0.6bemo4-merge",
+      "emotion_text": "Happy character speaking: {seg}"
+    },
+    "class_type": "QwenEmotionNode",
+    "_meta": {
+      "title": "🌈 IndexTTS-2 Text Emotion"
+    }
+  },
+  "125": {
+    "inputs": {
+      "Happy": 0.17,
+      "Angry": 0.29,
+      "Sad": 0.86,
+      "Surprised": 0.73,
+      "Afraid": 0.94,
+      "Disgusted": 0.15,
+      "Calm": 0.05,
+      "Melancholic": 0.31,
+      "emotion_radar_canvas": ""
+    },
+    "class_type": "IndexTTSEmotionOptionsNode",
+    "_meta": {
+      "title": "🌈 IndexTTS-2 Emotion Vectors"
+    }
+  },
+  "130": {
+    "inputs": {
+      "voice_name": "voices/铅玻璃.mp3",
+      "reference_text": "The melody-like sound of rain drops on the window is always here, accompanying me through the long long night.",
+      "trim_start": 0,
+      "trim_end": 11.77,
+      "customized": false
+    },
+    "class_type": "CharacterVoicesNode",
+    "_meta": {
+      "title": "🎭 Character Voices"
+    }
+  },
+  "131": {
+    "inputs": {
+      "audio": "zh_vo_Main_Linaxita_2_0_3_7.wav"
+    },
+    "class_type": "LoadAudio",
+    "_meta": {
+      "title": "加载音频"
+    }
+  },
+  "137": {
+    "inputs": {
+      "filename_prefix": "audio/2026-08-25/234218",
+      "audio": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "SaveAudio",
+    "_meta": {
+      "title": "保存音频"
+    }
+  }
+}

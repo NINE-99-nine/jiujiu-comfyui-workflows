@@ -1,0 +1,385 @@
+{
+  "2": {
+    "inputs": {
+      "clip_name": "qwen3.5_9b_int8_convrot.safetensors",
+      "type": "moss_image",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "3": {
+    "inputs": {
+      "vae_name": "flux2-vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "4": {
+    "inputs": {
+      "text": [
+        "101",
+        0
+      ],
+      "clip": [
+        "93",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "正面提示词"
+    }
+  },
+  "5": {
+    "inputs": {
+      "text": "worst quality, bad anatomy, watermark, jpeg artifact\n\n",
+      "clip": [
+        "93",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "负面提示词"
+    }
+  },
+  "7": {
+    "inputs": {
+      "width": [
+        "8",
+        0
+      ],
+      "height": [
+        "8",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "8": {
+    "inputs": {
+      "aspect_ratio": "9:16 (Portrait Widescreen)",
+      "megapixels": 1.6,
+      "multiple": 8
+    },
+    "class_type": "ResolutionSelector",
+    "_meta": {
+      "title": "分辨率选择器"
+    }
+  },
+  "13": {
+    "inputs": {
+      "unet_name": "moss image\\moss_image_base_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "19": {
+    "inputs": {
+      "seed": 268827190805478,
+      "steps": 8,
+      "cfg": 1,
+      "sampler_name": "er_sde",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "93",
+        0
+      ],
+      "positive": [
+        "4",
+        0
+      ],
+      "negative": [
+        "5",
+        0
+      ],
+      "latent_image": [
+        "7",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "22": {
+    "inputs": {
+      "samples": [
+        "19",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "61": {
+    "inputs": {
+      "lora_name": "moss image\\MOSS_Image_SFT_8_steps_dmd_v0.1.safetensors",
+      "strength_model": 1,
+      "model": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "79": {
+    "inputs": {
+      "model": "ema_vae_fp16.safetensors",
+      "device": "xpu:0",
+      "encode_tiled": false,
+      "encode_tile_size": 1024,
+      "encode_tile_overlap": 128,
+      "decode_tiled": true,
+      "decode_tile_size": 1024,
+      "decode_tile_overlap": 128,
+      "tile_debug": "false",
+      "offload_device": "cpu",
+      "cache_model": false
+    },
+    "class_type": "SeedVR2LoadVAEModel",
+    "_meta": {
+      "title": "SeedVR2 (Down)Load VAE Model"
+    }
+  },
+  "80": {
+    "inputs": {
+      "model": "seedvr2_ema_3b-Q4_K_M.gguf",
+      "device": "xpu:0",
+      "blocks_to_swap": 32,
+      "swap_io_components": false,
+      "offload_device": "cpu",
+      "cache_model": false,
+      "attention_mode": "flash_attn_3"
+    },
+    "class_type": "SeedVR2LoadDiTModel",
+    "_meta": {
+      "title": "SeedVR2 (Down)Load DiT Model"
+    }
+  },
+  "81": {
+    "inputs": {
+      "filename_prefix": "2026-10-20/142313",
+      "images": [
+        "97",
+        1
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "85": {
+    "inputs": {
+      "seed": 2150721059,
+      "resolution": 1440,
+      "max_resolution": 2880,
+      "batch_size": 1,
+      "uniform_batch_size": false,
+      "color_correction": "lab",
+      "temporal_overlap": 0,
+      "prepend_frames": 0,
+      "input_noise_scale": 0,
+      "latent_noise_scale": 0,
+      "offload_device": "xpu:0",
+      "enable_debug": false,
+      "image": [
+        "103",
+        1
+      ],
+      "dit": [
+        "80",
+        0
+      ],
+      "vae": [
+        "79",
+        0
+      ]
+    },
+    "class_type": "SeedVR2VideoUpscaler",
+    "_meta": {
+      "title": "SeedVR2 Video Upscaler (v2.5.24)"
+    }
+  },
+  "89": {
+    "inputs": {
+      "images": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "93": {
+    "inputs": {
+      "__lm_autocomplete_meta_text": {
+        "version": 1,
+        "textWidgetName": "text"
+      },
+      "text": "<lora:anireal_moss_lora_v1:1.00> <lora:kzmynon-moss-v1_comfyui:1.00> <lora:MOSS-HOCF_000001925:1.00> <lora:Nyalia_moss_v1_lokr:1.00> <lora:wlop12:1.00> <lora:moss_context_detaile_tweaker_20261018_rank2:0.60>",
+      "loras": {
+        "__value__": [
+          {
+            "name": "moss_context_detaile_tweaker_20261018_rank2",
+            "strength": "0.60",
+            "active": true,
+            "expanded": false,
+            "clipStrength": "0.60",
+            "selected": true,
+            "locked": false
+          },
+          {
+            "name": "Nyalia_moss_v1_lokr",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "kzmynon-moss-v1_comfyui",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "anireal_moss_lora_v1",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "MOSS-HOCF_000001925",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "wlop12",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          }
+        ]
+      },
+      "model": [
+        "61",
+        0
+      ],
+      "clip": [
+        "2",
+        0
+      ]
+    },
+    "class_type": "Lora Loader (LoraManager)",
+    "_meta": {
+      "title": "Lora Loader (LoraManager)"
+    }
+  },
+  "96": {
+    "inputs": {
+      "gmm_ui": ""
+    },
+    "class_type": "GroupIgnoreManager",
+    "_meta": {
+      "title": "组忽略管理器 (Group Ignore Manager)"
+    }
+  },
+  "97": {
+    "inputs": {
+      "优先输入": [
+        "85",
+        0
+      ],
+      "备用输入": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "99": {
+    "inputs": {
+      "String": ""
+    },
+    "class_type": "String",
+    "_meta": {
+      "title": "提示词"
+    }
+  },
+  "101": {
+    "inputs": {
+      "inputcount": 8,
+      "delimiter": "",
+      "return_list": false,
+      "Update inputs": null,
+      "string_1": [
+        "93",
+        2
+      ],
+      "string_3": [
+        "99",
+        0
+      ]
+    },
+    "class_type": "JoinStringMulti",
+    "_meta": {
+      "title": "Join String Multi"
+    }
+  },
+  "103": {
+    "inputs": {
+      "备用输入": [
+        "22",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "万能判断切换 (Any Switch)"
+    }
+  }
+}
