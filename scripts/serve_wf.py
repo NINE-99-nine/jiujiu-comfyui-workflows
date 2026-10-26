@@ -1,8 +1,8 @@
 # 临时 CORS 服务器：向浏览器前端提供【技能内归档的工作流副本】（只服务本机 127.0.0.1）
 # 用法：复制到 D 盘任意目录（严禁 C 盘！），后台运行：
-#   cd D:/xxx && python serve_wf.py
-# 验证：curl -s http://127.0.0.1:8765/ping  →  pong
-# 取工作流：curl http://127.0.0.1:8765/wf/<URL编码文件名>.json
+#   cd <local_path> && python serve_wf.py
+# 验证：curl -s htt<local_path>  →  pong
+# 取工作流：curl htt<local_path><URL编码文件名>.json
 #
 # ⚠️ 固定副本机制：WF_DIR 指向技能库 workflows/ 目录，而非作者的实时工作流目录。
 #   作者在原位置更新工作流不影响这里加载的副本——每次行为一致，稳定可靠。

@@ -75,9 +75,9 @@
 
 ```bash
 # 简单编辑（单图）
-python flux2图像正常编辑_api.py --img1 "f:/x.png" --prompt "把图1的人换成白发红瞳少女" --w 1344 --h 1344 --name edit1
+python flux2图像正常编辑_api.py --img1 "<local_path>" --prompt "把图1的人换成白发红瞳少女" --w 1344 --h 1344 --name edit1
 # 多参考（图1图2人物放图3场景）
-python flux2图像正常编辑_api.py --img1 "f:/x.png" --img2 "f:/y.png" --img3 "f:/z.png" --prompt "让图1图2的人物出现在图3场景里" --w 1024 --h 768 --name multi
+python flux2图像正常编辑_api.py --img1 "<local_path>" --img2 "<local_path>" --img3 "<local_path>" --prompt "让图1图2的人物出现在图3场景里" --w 1024 --h 768 --name multi
 ```
 
 - `--img1` 主图 + `--prompt` 编辑内容基本必传

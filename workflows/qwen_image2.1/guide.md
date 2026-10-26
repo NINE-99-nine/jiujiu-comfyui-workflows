@@ -10,8 +10,8 @@
 |---|---|
 | API 模板（引子读这个） | `workflows/qwen_image2.1/qwen_image2.1汇总_api.json` |
 | UI 副本（仅供人看/部署参考） | `workflows/qwen_image2.1/qwen_image2.1汇总.json` |
-| 原件 · API 版 | `<your_data_dir>\AI\AI生成的优秀案例\AI绘画优秀案例\qwen_image2.1汇总.json` |
-| 原件 · UI 版 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\qwen_image2.1汇总.json` |
+| 原件 · API 版 | `<local_path>` |
+| 原件 · UI 版 | `<local_path>` |
 | 归档校验 | API `f03d63d06427ab4374d5a704f212fda4`（**v4 · 标准流 20 步**）／ UI `7b0b11a063056878c0a5a30cb0a716a3` |
 | 入库 / 换代 | 2026-09-21 入库 ｜ **2026-09-24 模板换代**（扁平节点号 + String 提示词入口） ｜ **2026-10-11 当天先试 turbo、当日弃用 → 换回标准模型 + 默认 20 步** |
 

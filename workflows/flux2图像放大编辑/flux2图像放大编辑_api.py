@@ -17,8 +17,8 @@
 #   [13]conditioning=[22]/latent=[8(图2)]，[12]conditioning=[19]/latent=[8(图2)]——以图2作参考、文本控制编辑。
 #
 # 用法:
-#   python flux2图像放大编辑_api.py --img1 f:/x.png --mask "the girl" --prompt "change her expression to..." \
-#         [--img2 f:/y.png --use-img2]
+#   python flux2图像放大编辑_api.py --img1 <local_path> --mask "the girl" --prompt "change her expression to..." \
+#         [--img2 <local_path> --use-img2]
 # 只输出一行 JSON: {"kind":"image","prompt_id":…,"file":…,"size":…}
 
 import argparse, json, os, sys, datetime, re, urllib.request

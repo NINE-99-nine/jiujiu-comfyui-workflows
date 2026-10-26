@@ -22,8 +22,8 @@
   "4": {
     "inputs": {
       "text": [
-        "101",
-        0
+        "121",
+        1
       ],
       "clip": [
         "93",
@@ -51,11 +51,11 @@
   "7": {
     "inputs": {
       "width": [
-        "8",
+        "154",
         0
       ],
       "height": [
-        "8",
+        "154",
         1
       ],
       "batch_size": 1
@@ -63,17 +63,6 @@
     "class_type": "EmptyLatentImage",
     "_meta": {
       "title": "空Latent图像"
-    }
-  },
-  "8": {
-    "inputs": {
-      "aspect_ratio": "9:16 (Portrait Widescreen)",
-      "megapixels": 1.6,
-      "multiple": 8
-    },
-    "class_type": "ResolutionSelector",
-    "_meta": {
-      "title": "分辨率选择器"
     }
   },
   "13": {
@@ -88,9 +77,9 @@
   },
   "19": {
     "inputs": {
-      "seed": 268827190805478,
+      "seed": 713563336550170,
       "steps": 8,
-      "cfg": 1,
+      "cfg": 1.0,
       "sampler_name": "er_sde",
       "scheduler": "simple",
       "denoise": 1,
@@ -134,7 +123,7 @@
   },
   "61": {
     "inputs": {
-      "lora_name": "moss image\\MOSS_Image_SFT_8_steps_dmd_v0.1.safetensors",
+      "lora_name": "moss image\\lodestones-8-steps-dmd2-lora.safetensors",
       "strength_model": 1,
       "model": [
         "13",
@@ -146,43 +135,9 @@
       "title": "LoRA加载器（仅模型）"
     }
   },
-  "79": {
-    "inputs": {
-      "model": "ema_vae_fp16.safetensors",
-      "device": "xpu:0",
-      "encode_tiled": false,
-      "encode_tile_size": 1024,
-      "encode_tile_overlap": 128,
-      "decode_tiled": true,
-      "decode_tile_size": 1024,
-      "decode_tile_overlap": 128,
-      "tile_debug": "false",
-      "offload_device": "cpu",
-      "cache_model": false
-    },
-    "class_type": "SeedVR2LoadVAEModel",
-    "_meta": {
-      "title": "SeedVR2 (Down)Load VAE Model"
-    }
-  },
-  "80": {
-    "inputs": {
-      "model": "seedvr2_ema_3b-Q4_K_M.gguf",
-      "device": "xpu:0",
-      "blocks_to_swap": 32,
-      "swap_io_components": false,
-      "offload_device": "cpu",
-      "cache_model": false,
-      "attention_mode": "flash_attn_3"
-    },
-    "class_type": "SeedVR2LoadDiTModel",
-    "_meta": {
-      "title": "SeedVR2 (Down)Load DiT Model"
-    }
-  },
   "81": {
     "inputs": {
-      "filename_prefix": "2026-10-20/142313",
+      "filename_prefix": "2026-10-24/213155",
       "images": [
         "97",
         1
@@ -191,38 +146,6 @@
     "class_type": "SaveImage",
     "_meta": {
       "title": "保存图像"
-    }
-  },
-  "85": {
-    "inputs": {
-      "seed": 2150721059,
-      "resolution": 1440,
-      "max_resolution": 2880,
-      "batch_size": 1,
-      "uniform_batch_size": false,
-      "color_correction": "lab",
-      "temporal_overlap": 0,
-      "prepend_frames": 0,
-      "input_noise_scale": 0,
-      "latent_noise_scale": 0,
-      "offload_device": "xpu:0",
-      "enable_debug": false,
-      "image": [
-        "103",
-        1
-      ],
-      "dit": [
-        "80",
-        0
-      ],
-      "vae": [
-        "79",
-        0
-      ]
-    },
-    "class_type": "SeedVR2VideoUpscaler",
-    "_meta": {
-      "title": "SeedVR2 Video Upscaler (v2.5.24)"
     }
   },
   "89": {
@@ -243,7 +166,7 @@
         "version": 1,
         "textWidgetName": "text"
       },
-      "text": "<lora:anireal_moss_lora_v1:1.00> <lora:kzmynon-moss-v1_comfyui:1.00> <lora:MOSS-HOCF_000001925:1.00> <lora:Nyalia_moss_v1_lokr:1.00> <lora:wlop12:1.00> <lora:moss_context_detaile_tweaker_20261018_rank2:0.60>",
+      "text": "<lora:anireal_moss_lora_v1:1.00> <lora:kzmynon-moss-v1_comfyui:1.00> <lora:MOSS-HOCF_000001925:1.00> <lora:Nyalia_moss_v1_lokr:1.00> <lora:wlop12:1.00> <lora:moss_context_detaile_tweaker_20261018_rank2:0.60> <lora:fkey-lora-r4-muon-step6840-comfy:1.00> <lora:LP Flat-moss-v2:1.00>",
       "loras": {
         "__value__": [
           {
@@ -252,7 +175,25 @@
             "active": true,
             "expanded": false,
             "clipStrength": "0.60",
-            "selected": true,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "KOOK-MOSS-SFT-观澜",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "fkey-lora-r4-muon-step6840-comfy",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
             "locked": false
           },
           {
@@ -288,11 +229,20 @@
             "active": false,
             "expanded": false,
             "clipStrength": 1,
-            "selected": false,
+            "selected": true,
             "locked": false
           },
           {
             "name": "wlop12",
+            "strength": 1,
+            "active": false,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "LP Flat-moss-v2",
             "strength": 1,
             "active": false,
             "expanded": false,
@@ -316,20 +266,11 @@
       "title": "Lora Loader (LoraManager)"
     }
   },
-  "96": {
-    "inputs": {
-      "gmm_ui": ""
-    },
-    "class_type": "GroupIgnoreManager",
-    "_meta": {
-      "title": "组忽略管理器 (Group Ignore Manager)"
-    }
-  },
   "97": {
     "inputs": {
       "优先输入": [
-        "85",
-        0
+        "103",
+        1
       ],
       "备用输入": [
         "22",
@@ -339,6 +280,15 @@
     "class_type": "AnySwitch",
     "_meta": {
       "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "98": {
+    "inputs": {
+      "String": ""
+    },
+    "class_type": "String",
+    "_meta": {
+      "title": "质量词"
     }
   },
   "99": {
@@ -360,6 +310,10 @@
         "93",
         2
       ],
+      "string_2": [
+        "98",
+        0
+      ],
       "string_3": [
         "99",
         0
@@ -380,6 +334,37 @@
     "class_type": "AnySwitch",
     "_meta": {
       "title": "万能判断切换 (Any Switch)"
+    }
+  },
+  "121": {
+    "inputs": {
+      "备用输入": [
+        "101",
+        0
+      ]
+    },
+    "class_type": "AnySwitch",
+    "_meta": {
+      "title": "自动切换提示词增强"
+    }
+  },
+  "154": {
+    "inputs": {
+      "width": 1024,
+      "height": 1536
+    },
+    "class_type": "ResolutionMasterSimplify",
+    "_meta": {
+      "title": "分辨率大师简化版 (Resolution Master Simplify)"
+    }
+  },
+  "155": {
+    "inputs": {
+      "gmm_ui": ""
+    },
+    "class_type": "GroupIgnoreManager",
+    "_meta": {
+      "title": "组忽略管理器 (Group Ignore Manager)"
     }
   }
 }

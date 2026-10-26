@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | 固定副本 | `workflows/<工作流名>/<文件>.json`（本技能内） |
-| 原件位置 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\<原件>.json` |
+| 原件位置 | `<local_path><原件>.json` |
 | 归档校验 | 归档时 MD5 与原件一致；作者更新原件后副本不回跟（要更新副本需显式重新拷贝） |
 
 ## 可改节点（本工作流唯一可控面）
@@ -21,8 +21,8 @@
 ## 加载与提交链路（简版）
 
 1. 临时服务器 `scripts/serve_wf.py`（WF_DIR 指向伞技能 `workflows/` 目录）→ curl 8765/ping
-2. 浏览器 `http://127.0.0.1:8188` → fetch 副本（**路径带子目录**：`/wf/<工作流名>/<文件>.json`，中文名 encodeURIComponent）→ 改节点 → `graphToPrompt()`（结果在 `.output`）→ POST `/api/prompt`（查 node_errors: {}）
-3. 成品在 `<comfyui_dir>\output\<日期>\`（F 盘）→ 重命名中文名交付
+2. 浏览器 `htt<local_path>` → fetch 副本（**路径带子目录**：`/wf/<工作流名>/<文件>.json`，中文名 encodeURIComponent）→ 改节点 → `graphToPrompt()`（结果在 `.output`）→ POST `/api/prompt`（查 node_errors: {}）
+3. 成品在 `<local_path><日期>\`（F 盘）→ 重命名中文名交付
 
 详细执行/排障见 `execution/EXECUTION.md`。
 

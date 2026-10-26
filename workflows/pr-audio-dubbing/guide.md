@@ -16,10 +16,10 @@ VoxCPM 生成(十四行诗/lora+参考) → flac
 
 | 项 | 位置 | 说明 |
 |---|---|---|
-| **pymiere venv** | `<your_data_dir>\tool\PR\pymiere_venv2\` | 独立 D 盘 venv（不污染 Hermes），装 `pymiere==1.4.1` |
-| **Pymiere Link 扩展** | `<your_data_dir>\tool\PR\Adobe Premiere Pro 2026\CEP\extensions\com.qmasingarbe.PymiereLink\` | 手动放置（解压 zxp），PR 2026 可加载（窗口→扩展→Pymiere Link） |
-| **ffmpeg** | `<home>\AppData\Local\Microsoft\WinGet\Links\ffmpeg.exe` | 转 wav 用（Windows 环境，中文路径用 subprocess 传字节） |
-| **venv python** | `<your_data_dir>\tool\PR\pymiere_venv2\Scripts\python.exe` | 跑 pr_place_inner 用的解释器 |
+| **pymiere venv** | `<local_path>` | 独立 D 盘 venv（不污染 Hermes），装 `pymiere==1.4.1` |
+| **Pymiere Link 扩展** | `<local_path> Premiere Pro 2026\CEP\extensions\com.qmasingarbe.PymiereLink\` | 手动放置（解压 zxp），PR 2026 可加载（窗口→扩展→Pymiere Link） |
+| **ffmpeg** | `<local_path>` | 转 wav 用（Windows 环境，中文路径用 subprocess 传字节） |
+| **venv python** | `<local_path>` | 跑 pr_place_inner 用的解释器 |
 
 > ⚠️ **前置**：PR 必须**正在运行**且能加载 Pymiere Link（不运行则 pymiere 连不上）。pymiere 官方测到 PR 2023，本机 PR 2026 实测兼容（`isDocumentOpen: True`、`insertClip` 正常）。
 

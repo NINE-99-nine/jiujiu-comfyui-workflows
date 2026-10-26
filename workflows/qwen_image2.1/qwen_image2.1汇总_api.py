@@ -31,10 +31,10 @@
 #
 # 用法：
 #   python qwen_image2.1汇总_api.py --prompt-file 词.txt
-#   python qwen_image2.1汇总_api.py --prompt "..." --images "f:/a.png"                 # auto → 编辑
-#   python qwen_image2.1汇总_api.py --prompt "..." --images "f:/a.png,f:/b.png"        # 图1目标 + 图2参考
+#   python qwen_image2.1汇总_api.py --prompt "..." --images "<local_path>"                 # auto → 编辑
+#   python qwen_image2.1汇总_api.py --prompt "..." --images "<local_path>"        # 图1目标 + 图2参考
 #   python qwen_image2.1汇总_api.py --prompt "..." --ratio "9:16 (Portrait Widescreen)" --megapixels 2
-#   python qwen_image2.1汇总_api.py --prompt "..." --images "f:/a.png" --resolution 1024 \
+#   python qwen_image2.1汇总_api.py --prompt "..." --images "<local_path>" --resolution 1024 \
 #          --custom-size --ratio "16:9 (Widescreen)" --megapixels 2.0   # 图生图 + 自定义 2MP 画布
 #   只输出一行 JSON：{"kind":"image","prompt_id":…,"file":…,"size":…}
 

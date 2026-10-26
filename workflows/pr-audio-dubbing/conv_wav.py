@@ -2,8 +2,8 @@
 # 把 34 段 flac 转成 wav（PR 对 wav 支持最稳），中文路径用 subprocess 传字节
 import subprocess, glob, os
 
-SRC = r"<voice_dir>/PR视频的配音内容/临时文件"
-DST = r"<voice_dir>/PR视频的配音内容/temp_wav"
+SRC = r"<local_path>"
+DST = r"<local_path>"
 os.makedirs(DST, exist_ok=True)
 
 files = glob.glob(os.path.join(SRC, "*.flac"))
@@ -12,7 +12,7 @@ def num_key(p):
     except: return 9999
 files.sort(key=num_key)
 
-ffmpeg = r"<home>/AppData/Local/Microsoft/WinGet/Links/ffmpeg.exe"
+ffmpeg = r"<local_path>"
 
 ok = 0
 for f in files:

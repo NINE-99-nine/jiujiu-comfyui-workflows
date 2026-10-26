@@ -1,4 +1,4 @@
-# 角色库速查（<comfyui_dir>\models\voices\）
+# 角色库速查（<local_path>
 
 > 更新日期：2026-08-09。新增角色后在此追加。
 
@@ -20,7 +20,7 @@
 ## 新增角色流程
 
 1. 音频 5-15s（.wav/.mp3/.flac/.ogg/.m4a/.aac），>15s 建议裁剪
-2. `cp 源音频 <comfyui_dir>/models/voices/角色名.扩展名`
-3. `echo "纯参考文本" > <comfyui_dir>/models/voices/角色名.txt`
+2. `cp 源音频 <local_path>`
+3. `echo "纯参考文本" > <local_path>`
 4. ComfyUI 刷新角色缓存（Refresh Voice Cache 节点）或重启
 5. 更新本速查表

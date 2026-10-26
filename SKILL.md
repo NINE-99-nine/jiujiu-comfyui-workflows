@@ -1,6 +1,6 @@
 ---
 name: jiujiu-comfyui-workflows
-description: "用当作者要生图/配音/海报嵌字。作者的 ComfyUI 工作流库总入口，一工作流一子技能。"
+description: "用户使用 ComfyUI 工作流库核心总入口，内部高度集成，一工作流一子技能。"
 version: 1.0.0
 author: 作者
 license: MIT
@@ -43,16 +43,20 @@ jiujiu-comfyui-workflows/
 │   │   ├── prompting.md      ← 提示词总纲（画风质感→画面内容→构图镜头；**无词量硬限**，设计类可长可细；引号标文字）
 │   │   ├── krea2汇总_api.json/.py   ← 唯一合法 API 模板 + 引子
 │   │   └── krea2汇总.json    ← 固定副本（UI 格式）
-│   ├── moss/                 ← 🎨 MOSS-Image 生图（8 步 dmd ＋ **LoRA 堆 6 条** ＋ **SeedVR2 放大 1440**；Caption / Layout 两种提示词）
-│   │   ├── guide.md          ← 使用守则（两份副本分工 / UI 版结构 / 可改节点 / LoRA / 放大链 / 分辨率）
-│   │   ├── prompting.md      ← 提示词原则（Caption 散文 / Layout 像素框，二选一）
-│   │   ├── moss_api.json/.py ← API 模板（**21 节点**）+ 引子（--loras / --seedvr2-res / --list-loras）
-│   │   └── moss_image.json   ← UI 副本（**28 节点 / 5 分组**，手动开图用；主线 euler，旁线 er_sde 默认旁路）
+│   ├── moss/                 ← 🎨 MOSS-Image 生图（**8 步 / cfg 1.0** ＋ **LoRA 堆 9 条**，默认只开 1 条：细节档 ＋ **放大默认关**（模板无 SeedVR2 节点，`--upscale` 时引子内存补链到短边 1440）；Caption / Layout 两种提示词）
+│   │   ├── guide.md          ← 使用守则（能力边界 / 模型体量与显存 / 两份副本分工 / **两个提示词框** / 分辨率节点 154 / 采样档 / LoRA / 放大 / UI 独有分组 / 致命错误）
+│   │   ├── prompting.md      ← 提示词编写（**§1 三形态判定 / §2 九要素下笔骨架 / §3 Caption 硬规则 / §4 扩写档 / §5 Tag 串 / §6 Layout / §7 bbox 保护九条 / §8 与工作流的关系 / §9 JSON 管不了的三件事 / §10 翻车对照＋自查**）
+│   │   ├── moss_api.json/.py ← API 模板（**20 节点**）+ 引子（--loras / --upscale / --seedvr2-res / --list-loras）
+│   │   └── moss_image.json   ← UI 副本（**34 节点 / 7 分组**，手动开图用；含提示词增强、边界框、latent 高清放大、seedvr2 四个默认旁路分组）
 │   ├── qwen_image2.1/        ← 🎨 Qwen-Image 2.1 生图（**临时**；无图=文生图 / 有图=编辑，多图参考）
 │   │   ├── guide.md          ← 使用守则（节点地图 / 两用开关 / 多图机制 / 引子参数 / Pitfalls）
 │   │   ├── prompting.md      ← 提示词编写指南（五段骨架 / 写实vs二次元 / 编辑写法 / 文字渲染 / 翻车对照）
 │   │   ├── qwen_image2.1汇总_api.json/.py ← API 模板 + 引子（同 basename 配对）
 │   │   └── qwen_image2.1汇总.json ← UI 副本（测试版存档，仅供人看）
+│   ├── qwenimage2.1局部放大编辑/ ← 🎨 **qwen2.1 局部放大编辑**（SAM3.1 定位遮罩 → 裁出放大 → 只改这一块 → 拼回原图；图1[8]=原图 / 英文检索词[25] / 编辑词[4] + 多图参考 --ref）
+│   │   ├── guide.md          ← 使用守则（五步链路 / 节点地图 / 参数表 / 多图语义 / 提示词三件事 / Pitfalls）
+│   │   ├── qwenimage2.1局部放大编辑_api.json/.py ← API 模板 + 引子（同 basename 配对）
+│   │   └── qwenimage2.1局部放大编辑.json ← UI 副本（6 分组 28 节点，仅供人看）
 │   ├── indextts2/            ← 🎙️ IndexTTS-2 配音（narrator=none，需 [角色名] 标签）
 │   │   ├── guide.md          ← TTS 使用守则（提交方式/[65] 文本 + 角色语法）
 │   │   ├── 🌈 IndexTTS-2 integration-API.json/.py ← 导出 API 模板 + 引子
@@ -69,7 +73,11 @@ jiujiu-comfyui-workflows/
 │   ├── comfy_submit.py       ← 通用递交执行器（图像+音频，唯一真正碰 ComfyUI 的件）
 │   ├── env.py                ← 环境脚本（换 ComfyUI 环境只改这里）
 │   └── EXECUTION.md          ← 黑盒链路说明 + 两脚本职责 + 使用方式
-
+│   ├── guide.md              ← 嵌字使用守则（流程/布局铁律/风格索引/人设图章节）
+│   ├── styles/               ← ★风格库：一风格一子目录（guide.md 指导 + case.html 案例）
+│   ├── references/           ← 活文档（character-tags 角色串速查/批量流程）
+│   ├── scripts/              ← manga_panel.py（唯一脚本）
+│   └── _archive/             ← 历史死文档（不再引用）
 ├── prompt-library/           ← 📚 优质提示词库（**成品范式 + 复刻资料**，非工作流操作）
 │   ├── README.md             ← 分类机制：模型风格库（`<模型>/`）+ 通用内容词库
 │   ├── krea2/                ← ★krea2 风格库（一风格一份 `NN_风格.md`；见其 README）
@@ -92,10 +100,11 @@ jiujiu-comfyui-workflows/
 |---|---|
 | 「用 anima 画 XX」/ 正常图 / NSFW 图 / 多人图 | `workflows/anima/guide.md` |
 | 「用 krea2 画 XX」/ krea2 生图 | `workflows/krea2/guide.md` |
-| 「用 MOSS 画 XX」/ MOSS-Image 生图（caption / 精确文字版式；**带 LoRA 与 SeedVR2 放大**） | `workflows/moss/guide.md` |
-| 「我要自己在 ComfyUI 里跑 MOSS」/ 看 MOSS 的 UI 结构 | `workflows/moss/moss_image.json` ＋ guide 的「UI 版结构」节 |
+| 「用 MOSS 画 XX」/ MOSS-Image 生图（caption / 精确文字版式；**8 步 cfg 1.0、默认一条 LoRA（细节档）、默认不放大**） | `workflows/moss/guide.md` |
+| 「我要自己在 ComfyUI 里跑 MOSS」/ 看 MOSS 的 UI 结构 | `workflows/moss/moss_image.json` ＋ guide 的「§三 两份 json 的分工」「§九 UI 版独有的四个分组」 |
 | 「用 z image 画 XX」（中文提示词/大宽图/巨构） | `workflows/zimage/guide.md` |
 | 「用 qwen_image 2.1 画 XX」/ 拿参考图编辑（临时子技能） | `workflows/qwen_image2.1/guide.md` |
+| 「qwen2.1 局部放大编辑」/ 只改原图某一块（脸/衣服/丝袜）+ 多图参考 | `workflows/qwenimage2.1局部放大编辑/guide.md` |
 | 「换个画风/换个风格/换个 lora」 | `workflows/anima/guide.md` → **画风选择规则**（clarify 选择题 A/B/C…，默认 gpt-image-2） |
 | 「用 IndexTTS-2 配音/念台词」 | `workflows/indextts2/guide.md` |
 | 「用 VoxCPM 配音/生成语音」（API 直连，改文本即可） | `workflows/voxcpm/guide.md` |
@@ -112,7 +121,7 @@ jiujiu-comfyui-workflows/
 
 | 键 | 作用 | 默认 |
 |---|---|---|
-| `comfyui.url` | ComfyUI 基址（含端口） | `http://127.0.0.1:8188` |
+| `comfyui.url` | ComfyUI 基址（含端口） | `htt<local_path>` |
 | `comfyui.input_dir` | 往 ComfyUI 塞图时的 input 目录 | 空（不指定） |
 | `comfyui.models_dir` | ComfyUI models 目录 | 空（不指定） |
 | `paths.work_root` | 成品拷到这里，按 `_work/<引子名>/` 分目录 | 技能目录下 `_work/` |
@@ -128,12 +137,12 @@ jiujiu-comfyui-workflows/
 
 | 项 | 值 |
 |---|---|
-| ComfyUI 地址 | `http://127.0.0.1:8188`（Comfy Desktop 启动） |
-| 工作流原件目录 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\`（只读） |
-| 模型目录 | `<comfyui_dir>\models\` |
-| 输出目录 | `<comfyui_dir>\output\YYYY-MM-DD\`（**提交前必查 system_stats，防漂移 C 盘**） |
-| 角色语音库 | `<comfyui_dir>\models\voices\` |
-| 提示词小助手 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\prompt-assistant\tags\默认标签.csv` |
+| ComfyUI 地址 | `htt<local_path>`（Comfy Desktop 启动） |
+| 工作流原件目录 | `<local_path>`（只读） |
+| 模型目录 | `<local_path>` |
+| 输出目录 | `<local_path>`（**提交前必查 system_stats，防漂移 C 盘**） |
+| 角色语音库 | `<local_path>` |
+| 提示词小助手 | `<local_path>` |
 | GPU | Intel Arc A770 16GB（XPU） |
 | 启动参数 | **禁加 `--enable-dynamic-vram`**（8-19 大图画风漂移根因，已移除；详见 `references/user-comfyui-environment.md`） |
 | 临时脚本/产物 | 一律 D 盘（工作区 `_work\` 或 D 盘 tmp），**严禁 C 盘写入**；成品自动拷到 `_work/<引子basename>/` |
@@ -145,13 +154,13 @@ jiujiu-comfyui-workflows/
 
 0. **提交铁律（硬性）**：统一走**引子黑盒**——每个工作流一个与模板同 basename 的 `_api.py`（如 `krea2汇总_api.py`）。agent 只填参数：`python workflows/<名>/<名>_api.py --prompt "…" [--w … --h … --name … --loras 名:强度:on]`。引子自动 内存拼 API（**不落盘**）→ 递交 `execution/comfy_submit.py` → 校验 `node_errors:{}` → 轮询 → 拷贝成品到 `_work/<引子basename>/` → 打印一行 JSON。**模板=固定样本只读；引子只改 guide 指定节点；loras 默认=模板原样，传参只改点名条目（绝不增删/绝不误开其他）**。无 API 模板的全新工作流：浏览器 UI 加载一次导出 API 模板（见 `NEW_WORKFLOW_GUIDE.md`）。agent 不看引子/comfy_submit 内部，只用接口。
 
-1. **工作流原件只读**——加载/执行一律用技能库内固定副本，绝不改动 `F:\...\workflows\` 原件（作者会检查）。
-2. **临时脚本/文件一律 D 盘**（`<profile_dir>\tmp\`），C 盘零写入。
+1. **工作流原件只读**——加载/执行一律用技能库内固定副本，绝不改动 `<local_path>` 原件（作者会检查）。
+2. **临时脚本/文件一律 D 盘**（`<local_path>`），C 盘零写入。
 3. **提交前查输出目录**：`GET /system_stats` → argv → `--output-directory` 必须在 F 盘，漂移 C 盘则先告知作者处理，不擅自生成。
 4. **graphToPrompt() 结果在 `.output`**（仅浏览器备用流程用；主流程走引子不涉及）。
 5. **提交后必查 `node_errors: {}`**，非空则排障（execution/EXECUTION.md），不轮询注定失败的任务。
 6. **最终交付文件重命名为有意义中文名**（主题+版本+日期），禁止自动编号/临时名（作者习惯7，硬性）。
-7. **出图后不用 vision 自检**，直接 MEDIA: 交付（作者习惯6）。
+7. **出图链路只有三步：写提示词 → 提交 → `MEDIA:` 交付。** 禁 vision 自检、禁联网查证角色资料（角色外观凭已知/角色串直接写）、禁长篇汇报与逐项核对清单——除非作者明确要求「自检」「查一下」「详细说」。她反复纠正过：分析图片、查资料、写汇报都算节外生枝，耗时远超出图本身。（作者习惯6）
 8. **browser_console 单行 promise 链**、变量用 `window.__xxx` 防冲突、提示词含撇号用双引号包裹 JS 字符串。
 9. **完成后清理**：杀掉临时 CORS 服务器，删除 D 盘 tmp 临时脚本。
 10. **工作流副本是静态的**：用户没明确要求，绝不实时更新副本（见 NEW_WORKFLOW_GUIDE.md）。
@@ -164,36 +173,3 @@ jiujiu-comfyui-workflows/
 - [ ] 成品重命名为有意义中文名后 MEDIA: 交付
 - [ ] 临时服务器已 kill、临时脚本已清理
 
-## 发布构建（build_release）
-
-把本地工作版构建成可公开的发布版，**日常一条命令、几秒完成**。
-
-```bash
-python scripts/build_release.py          # 增量：只处理源文件变了的（实测 0.2s）
-python scripts/build_release.py --full   # 全量重建（首次 / 改了 release.json；实测 4.8s）
-python scripts/build_release.py --dry    # 只看计划不写盘
-```
-
-规则全在 `release.json`（工具文件，不进发布版），分四块：
-
-| 块 | 作用 |
-|---|---|
-| `exclude` | 排除私有内容：`本地私有库**`、`config.yaml`、`__pycache__`、`.bak`、NSFW 词库生成器 |
-| `sanitize` | 文本净化：`作者`→`作者`、`作者`→`作者`、本机绝对路径→`<your_data_dir>` 等占位符（**长的规则排前面**） |
-| `images` | 案例图转 **WebP** 并缩到 1600px 宽（实测 16 张 45.7MB → 3.0MB），并把 md 里的 `.png` 引用改成 `.webp` |
-| `scan_fail` | 构建完成后扫描，命中即失败退出（不静默放行） |
-
-**机制**
-- 增量靠 `.build_cache.json` 记每个源文件的 sha1；只处理变化项，图压缩结果也只在源图变了才重做。
-- 文本写出一律 LF 行尾（避免 `\r\r\n` 畸形行尾导致「diff 虚高」）。
-- 目标目录 `keep_as_is`（`README.md` / `LICENSE` / `.gitignore`）由人手维护，构建器只检查存在、不覆盖。
-- 源里删掉的文件，构建时同步从发布树删除。
-
-**发布流程**
-```bash
-python scripts/build_release.py         # 1. 构建（扫不过会报错退出）
-cd <publish 目录> && git add -A && git commit -m "sync"   # 2. 提交
-git push                                # 3. 推送
-```
-
-⚠️ **改了 `release.json` 的规则后必须 `--full`**，否则未变文件仍带旧规则的结果。

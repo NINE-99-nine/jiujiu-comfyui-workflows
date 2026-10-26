@@ -7,7 +7,7 @@
 ## 能干什么
 
 - **出图**：anima / krea2 / zimage / moss / qwen_image2.1 五条生图线，覆盖动漫向、写实向、海报排版、多人群像
-- **改图**：flux2 局部编辑（SAM3.1 遮罩 → 裁剪放大 → 重绘 → 拼回）与整图 / 多参考融合
+- **改图**：flux2 局部编辑（SAM3.1 遮罩 → 裁剪放大 → 重绘 → 拼回）与整图 / 多参考融合；qwen2.1 局部放大编辑（只改原图某一块，支持 `--ref` 多图参考）
 - **配音**：IndexTTS-2 与 VoxCPM，含音色克隆
 - **提示词库**：`prompt-library/` 按模型分目录，每条风格都带实出样图
 
@@ -18,8 +18,9 @@
 | **anima** | 🎨 动漫向生图（快速 / 正常两模式，正常带 SeedVR2 放大） | `anima_quick_template.py` · `anima_normal_template.py` |
 | **krea2** | 🎨 krea2 生图（Qwen3VL 自然语言 CLIP，×1.5 放大） | `krea2汇总_api.py` |
 | **zimage** | 🎨 Z-Image-Turbo 生图（无二次放大） | `zimage_full_template.py` |
-| **moss** | 🎨 MOSS-Image 生图（6 条 LoRA 堆 + SeedVR2；原生支持 JSON 布局控制多人物位置） | `moss_api.py` |
+| **moss** | 🎨 MOSS-Image 生图（8 步 / cfg 1.0，LoRA 堆 9 条默认只开细节档，**放大默认关**；原生支持 JSON 布局控制多人物位置） | `moss_api.py` |
 | **qwen_image2.1** | 🎨 人设卡片 / 设计字海报（多图参考） | `qwen_image2.1汇总_api.py` |
+| **qwenimage2.1局部放大编辑** | 🖼️ 只改原图某一块（脸 / 衣服 / 丝袜…），支持 `--ref` 多图参考 | `qwenimage2.1局部放大编辑_api.py` |
 | **flux2图像放大编辑** | 🖼️ 局部编辑（遮罩 → 裁剪放大 → 重绘 → 拼回） | `flux2图像放大编辑_api.py` |
 | **flux2图像正常编辑** | 🖼️ 整图 / 多参考编辑（最多 3 图融合） | `flux2图像正常编辑_api.py` |
 | **indextts2** | 🎙️ IndexTTS-2 配音 | `🌈 IndexTTS-2 integration-API.py` |

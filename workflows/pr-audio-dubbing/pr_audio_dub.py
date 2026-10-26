@@ -12,7 +12,7 @@
 # 输出：一行 JSON {"placed": N, "skipped": M, "track_clips": K}
 #
 # 前置条件（本机一次性配置，见 guide.md）：
-#   pip 在独立 venv:  <your_data_dir>/tool/PR/pymiere_venv2/Scripts/python.exe
+#   pip 在独立 venv:  <local_path>
 #   PR 需运行，Pymiere Link 扩展需可在 窗口→扩展 加载
 
 import argparse, csv, io, json, os, re, sys, glob, subprocess
@@ -22,8 +22,8 @@ PYMIERE_PY = None  # 运行时通过 --pymiere-py 指定，或自动探测
 def find_pymiere_py():
     """定位装了 pymiere 的 python。优先 --pymiere-py，其次探测常见路径，最后用当前解释器。"""
     cands = [
-        r"<your_data_dir>/tool/PR/pymiere_venv2/Scripts/python.exe",
-        r"<your_data_dir>/tool/PR/pymiere_venv/Scripts/python.exe",
+        r"<local_path>",
+        r"<local_path>",
     ]
     for c in cands:
         if os.path.exists(c):
@@ -68,7 +68,7 @@ def audio_durations(audio_dir):
     except ImportError:
         pass
     # 回退：ffprobe（中文路径用 subprocess 字节，避免 bash 编码问题）
-    ffprobe = r"<home>/AppData/Local/Microsoft/WinGet/Links/ffprobe.exe"
+    ffprobe = r"<local_path>"
     for f in glob.glob(os.path.join(audio_dir, "*.wav")) + glob.glob(os.path.join(audio_dir, "*.flac")):
         try:
             idx = int(os.path.basename(f).split("_")[0])
@@ -85,7 +85,7 @@ def audio_durations(audio_dir):
 def convert_flac_to_wav(audio_dir, ffmpeg=None):
     """把音频目录里所有 .flac 转成 .wav（PR 对 wav 支持最稳）。中文路径用 subprocess 传字节。"""
     if ffmpeg is None:
-        ffmpeg = r"<home>/AppData/Local/Microsoft/WinGet/Links/ffmpeg.exe"
+        ffmpeg = r"<local_path>"
     files = glob.glob(os.path.join(audio_dir, "*.flac"))
     ok = 0
     for f in files:

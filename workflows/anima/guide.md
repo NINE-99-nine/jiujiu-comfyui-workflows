@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | 固定副本 | `workflows/anima/anima模型（副本）.json`（本技能内，2026-08-17 改名） |
-| 原件位置 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\anima模型.json` |
+| 原件位置 | `<local_path>` |
 | **API 模板（定案 2026-08-19）** | `anima_quick_template.json` = **作者用 ComfyUI 内置导出功能导出的 API 版**（40 节点）。**不再手动从副本/graphToPrompt 生成**（8-19 教训：作者 自建模板导致画风错，官方导出即正常） |
 | 节点数 | 40（官方导出 API 版） |
 
@@ -75,7 +75,7 @@ anima 工作流通过 GroupIgnoreManager 逻辑门切换两种模式（**正常�
 | F. 线稿风 | `animeoutlineV4_16:0.90` | 描线清晰（备选） |
 | G. 其他画风 | （画风/ 目录备选：chen-bin_V3.9、sheya chen-000192、wy-000029_purged） | 需先问作者 |
 
-4. 模型目录：`<comfyui_dir>\models\loras\anima\`（优化/ 与 画风/ 两个子目录）。
+4. 模型目录：`<local_path>`（优化/ 与 画风/ 两个子目录）。
 5. **多画风 = 单图叠加（作者 2026-08-11 纠正）**：用户选多个画风时，默认是**一张图**同时叠加多个画风 LoRA——**API 直连：同时激活多个画风条目的 active 标记**；浏览器：text 并列写 `<lora:...>`，提交**一张**。**不是**每画风一张批量分图（曾误做成三张被作者纠正）。只有作者明确说"各出一张对比"时才循环提交多张。
 
 **铁律**：
@@ -109,7 +109,7 @@ anima 工作流通过 GroupIgnoreManager 逻辑门切换两种模式（**正常�
 - **长提示词／含英文双引号（气泡框台词、画面文字等）→ 把 `--prompt` 换成 `--prompt-file 提示词.txt`**（两模式均支持，与 `--prompt` 互斥，2026-09-14 与 krea2 同款改造）：根治"内嵌双引号被 PowerShell 截断参数"问题。文件按 UTF-8 **原样读取**（容 BOM、CRLF→LF、仅去首尾空白），段落与引号一字不改；文件不存在/为空 → 报错不递交。备份 `anima_quick_template.py.bak_20260914`、`anima_normal_template.py.bak_20260914`。
 - 引子自动 内存拼 API → 递交 → 校验 `node_errors:{}` → 轮询 → 拷成品到 `_work/<引子basename>/` → 一行 JSON。只改 [23]/[19]/[52]（normal 另 [344]），其余一字不动。
 - **浏览器 UI 仅为备用**：仅全新工作流无模板时，走一次浏览器加载生成模板（见 EXECUTION.md 备用节）。
-- 成品在 `<comfyui_dir>\output\<日期>\`（F 盘）。
+- 成品在 `<local_path><日期>\`（F 盘）。
 
 ## 提交铁律（2026-08-19 定案）
 

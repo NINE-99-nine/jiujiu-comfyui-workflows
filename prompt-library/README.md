@@ -38,6 +38,7 @@ prompt-library/
 | `anima/` | 模型风格库 | 01 杂志封面贴纸网点海报 · 02 已验证样例（详见 `anima/README.md`） |
 | `qwen_image2.1/` | 模型风格库 | 01 立绘卡片风格编辑 · 02 人设图设计 · **03 设计字广告海报**（详见 `qwen_image2.1/README.md`） |
 | `moss/` | 模型风格库 | **01 多人图提示词**（MOSS Scene JSON，每角色一个 bbox 框＋总述管层级与遮挡；官方十人 BA 群像）（详见 `moss/README.md`） |
+| `scripts/` | 维护脚本 | 词库提取/维护（`extract_prompts.py`） |
 
 ## 三、归置规则（禁止乱放）
 

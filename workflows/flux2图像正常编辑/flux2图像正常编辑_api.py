@@ -20,7 +20,7 @@
 #   把 1317 接在 1319(主图) 之后、1318 接在 1317 之后，最终 1318 → KSampler(1313)。
 #
 # 用法:
-#   python flux2图像正常编辑_api.py --img1 "f:/x.png" --prompt "把图1的人换成白发红瞳少女" [--img2 "f:/y.png"] [--img3 "f:/z.png"] [--w 1344 --h 768]
+#   python flux2图像正常编辑_api.py --img1 "<local_path>" --prompt "把图1的人换成白发红瞳少女" [--img2 "<local_path>"] [--img3 "<local_path>"] [--w 1344 --h 768]
 # 只输出一行 JSON: {"kind":"image","prompt_id":…,"file":…,"size":…}
 
 import argparse, json, os, sys, datetime, re, urllib.request

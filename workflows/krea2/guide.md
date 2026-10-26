@@ -14,7 +14,7 @@
 |---|---|
 | 固定副本 | `workflows/krea2/krea2汇总.json`（UI 格式，29 节点，MD5 `d2c51e14…`） |
 | API 参考 | `workflows/krea2/krea2汇总_api.json`（API 格式，27 节点，2026-08-23 作者导出） |
-| 原件位置 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\Krea2汇总.json` |
+| 原件位置 | `<local_path>` |
 | 模型族 | krea2 turbo（`krea2_turbo_int8_convrot`）+ wan_2.1 VAE + qwen3vl_4b_heretic CLIP（krea2 型） |
 | 出图链路（**三次处理**，8-31 作者新版） | [33] EmptyLatentImage（[31] 分辨率）→ [17] KSampler 7 步 cfg1（turbo 初次）→ [19] LatentUpscale 1.5× → [23] KSampler 10 步（精修）→ [21] VAEDecodeTiled → [20] ColorMatchV2 → [58] **SeedVR2 放大**（resolution=1600 短边 / max_resolution=2560 上限）→ [24] SaveImage。中间 [60] 清理显存 + [61] RAMCleanup 挂在 [20] 后 |
 | 图生图残留 | [30] LoadImage → [28] 缩放 1.5MP → [29] VAEEncode → [32] Latent Switch（select=0 走 [33] 生成路径，图生图链不生效；提交前按需 bypass） |

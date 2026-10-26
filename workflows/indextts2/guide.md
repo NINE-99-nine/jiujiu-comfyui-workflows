@@ -7,11 +7,11 @@
 | 项 | 值 |
 |---|---|
 | 固定副本 | `workflows/indextts2/IndexTTS-2集成工作流.json`（本技能内） |
-| 原件位置 | `<comfyui_installs>\jiujiu-2\ComfyUI\user\default\workflows\🌈 IndexTTS-2 integration.json` |
-| 角色库（voices） | `<comfyui_dir>\models\voices\`（extra_model_paths 映射 `'voices': 'voices/'`） |
+| 原件位置 | `<local_path> IndexTTS-2 integration.json` |
+| 角色库（voices） | `<local_path>`（extra_model_paths 映射 `'voices': 'voices/'`） |
 | 已入库角色 | 守岸人 / 十四行诗 / 库珀花环 / 铅玻璃（音频+同名 txt，清单见 `references/voice-library.md`） |
-| 模型目录 | `<comfyui_dir>\models\TTS\IndexTTS\` |
-| 输出 | `<comfyui_dir>\output\YYYY-MM-DD\`（F 盘 ✓） |
+| 模型目录 | `<local_path>` |
+| 输出 | `<local_path>`（F 盘 ✓） |
 | GPU | Intel Arc A770 16GB（XPU） |
 
 > ⚠️ **narrator 已设为 none**（作者设定）：**所有输入文本必须带角色标签**，不能依赖 narrator 兜底。未在库中的角色回退到 David_Attenborough 示例音——务必只用已入库角色。
@@ -34,8 +34,8 @@ python "🌈 IndexTTS-2 integration-API.py" --text-file 台词.txt [--name 名�
 
 ```bash
 # D 盘运行（严禁 C 盘！），后台启动
-cd "<profile_dir>/tmp" && python serve_wf.py   # background=true
-curl -s http://127.0.0.1:8765/ping   # 验证：pong
+cd "<local_path>" && python serve_wf.py   # background=true
+curl -s htt<local_path>   # 验证：pong
 ```
 
 脚本从伞技能 `scripts/serve_wf.py` 复制（WF_DIR 需指向伞技能 workflows/ 目录）。
@@ -43,9 +43,9 @@ curl -s http://127.0.0.1:8765/ping   # 验证：pong
 ### 2. 浏览器加载工作流副本 + 改 [65] 文本节点
 
 ```js
-// ① 导航到 http://127.0.0.1:8188/（browser_navigate）
+// ① 导航到 htt<local_path>
 // ② fetch 工作流副本（中文文件名必须 encodeURIComponent）：
-fetch('http://127.0.0.1:8765/wf/'+encodeURIComponent('indextts2/IndexTTS-2集成工作流.json')).then(r=>r.json())
+fetch('htt<local_path>'+encodeURIComponent('indextts2/IndexTTS-2集成工作流.json')).then(r=>r.json())
   .then(d=>{ window.__wf=d; return app.loadGraphData(d); });
 
 // ③ 只改 [65] 默认文本输入节点的 widgets[0].value（完整台词）：
@@ -68,10 +68,10 @@ app.graphToPrompt().then(res=>{
 ### 4. 轮询 + 交付
 
 ```bash
-for i in $(seq 1 60); do sleep 10; h=$(curl -s -m 5 "http://127.0.0.1:8188/history/<PROMPT_ID>" 2>/dev/null); if [ -n "$h" ] && [ "$h" != "{}" ]; then echo "$h" | python -c "import sys,json; h=json.load(sys.stdin); [print('音频:',o.get('audio',[{}])[0].get('filename') if o.get('audio') else [a.get('filename') for a in o.get('images',[])]) for e in h.values() for o in e.get('outputs',{}).values()]"; break; fi; done
+for i in $(seq 1 60); do sleep 10; h=$(curl -s -m 5 "htt<local_path><PROMPT_ID>" 2>/dev/null); if [ -n "$h" ] && [ "$h" != "{}" ]; then echo "$h" | python -c "import sys,json; h=json.load(sys.stdin); [print('音频:',o.get('audio',[{}])[0].get('filename') if o.get('audio') else [a.get('filename') for a in o.get('images',[])]) for e in h.values() for o in e.get('outputs',{}).values()]"; break; fi; done
 ```
 
-音频成品在 `<comfyui_dir>\output\<YYYY-MM-DD>\` → **重命名为有意义中文名**后 MEDIA: 交付（如「守岸人_台词_20260809.mp3」）。
+音频成品在 `<local_path><YYYY-MM-DD>\` → **重命名为有意义中文名**后 MEDIA: 交付（如「守岸人_台词_20260809.mp3」）。
 
 ## 文本输入语法
 
@@ -89,8 +89,8 @@ for i in $(seq 1 60); do sleep 10; h=$(curl -s -m 5 "http://127.0.0.1:8188/histo
 ```bash
 # 1. 角色音频（5-15s 最佳，.wav/.mp3/.flac/.ogg/.m4a/.aac）
 # 2. 同名 .txt（纯参考文本，无多余内容——作者习惯）
-cp "源音频.mp3" "<comfyui_dir>/models/voices/角色名.mp3"
-echo "参考文本" > "<comfyui_dir>/models/voices/角色名.txt"
+cp "源音频.mp3" "<local_path>"
+echo "参考文本" > "<local_path>"
 # 3. ComfyUI 里点「♻️ Refresh Voice Cache」或重启
 ```
 

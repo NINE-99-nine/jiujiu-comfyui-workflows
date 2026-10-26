@@ -39,7 +39,7 @@
 | 项 | 值 |
 |---|---|
 | 固定副本 | workflows/<名>/<文件>.json |
-| 原件位置 | F:\...\user\default\workflows\<原件>.json |
+| 原件位置 | <local_path><原件>.json |
 | 归档校验 | MD5：<归档时> |
 
 ## 可改节点（唯一可控面）

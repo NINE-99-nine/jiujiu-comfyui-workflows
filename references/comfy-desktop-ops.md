@@ -11,15 +11,15 @@
 - `%APPDATA%\Comfy Desktop\Crashpad\reports\*.dmp`（每个约 35MB，纯历史参考）
 
 ## 目录布局（实测案例）
-- 安装实例: `<comfyui_installs>\<实例名>\ComfyUI`（.venv 在实例内）
-- 共享模型: `<comfyui_dir>\models\{checkpoints,unet,loras,vae,text_encoders,...}`
+- 安装实例: `<local_path><实例名>\ComfyUI`（.venv 在实例内）
+- 共享模型: `<local_path>`
 - 输出: `--output-directory` 启动参数（可在 `/system_stats` 的 argv 里读到真实值）
 - 工作流存档: `<实例>\ComfyUI\user\default\workflows\`
 - 实例名常与用户相关（如 jiujiu-2）——别假设默认名，从 argv/log 里确认
 
 ## 启动 argv 解读（/system_stats 返回）
 ```
---extra-model-paths-config C:\Users\...\shared_model_paths.yaml  ← 共享模型路径配置
+--extra-model-paths-config <local_path>  ← 共享模型路径配置
 --input-directory / --output-directory                           ← 输入/输出目录（可能跨盘）
 --enable-manager                                                ← ComfyUI-Manager 已启用
 ```

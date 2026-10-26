@@ -42,9 +42,9 @@
 引子自动完成 图片上传（本地 → ComfyUI input 目录）→ 内存拼 API（**不落盘**）→ 递交 `execution/comfy_submit.py` → 校验 `node_errors:{}` → 轮询 → 拷贝成品到 `_work/flux2图像放大编辑/` → 打印一行 JSON。
 
 ```bash
-python flux2图像放大编辑_api.py --img1 "f:/x.png" --mask "face" --prompt "change her expression to a shy blush" --name 人物差分
+python flux2图像放大编辑_api.py --img1 "<local_path>" --mask "face" --prompt "change her expression to a shy blush" --name 人物差分
 # 多参考：
-python flux2图像放大编辑_api.py --img1 "f:/scene.png" --mask "the girl" --prompt "replace her with the person from image2" --img2 "f:/char.png" --use-img2 --name 换人物
+python flux2图像放大编辑_api.py --img1 "<local_path>" --mask "the girl" --prompt "replace her with the person from image2" --img2 "<local_path>" --use-img2 --name 换人物
 ```
 
 - `--img1` 必传（编辑原图）
