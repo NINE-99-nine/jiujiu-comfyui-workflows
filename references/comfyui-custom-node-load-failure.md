@@ -5,10 +5,10 @@ How to diagnose a custom node that shows `IMPORT FAILED` in ComfyUI startup logs
 2026-08-05 on the seedvr2_videoupscaler failure after torch 2.10 → 2.13+xpu.
 
 ## Fast triage
-1. `curl htt<local_path>` — confirm pytorch_version, argv (vram flags, extra paths).
+1. `curl http://127.0.0.1:8188/system_stats` — confirm pytorch_version, argv (vram flags, extra paths).
 2. `grep -inE "seedvr|Traceback|ImportError|Cannot import" <install>/ComfyUI/user/comfyui.log | tail -40`
    — the real Traceback is logged here, NOT in the Comfy Desktop app.log.
-3. `curl htt<local_path> | python -c "import json,sys; d=json.load(sys.stdin); print(sorted(k for k in d if '<node>' in k.lower()))"`
+3. `curl http://127.0.0.1:8188/object_info | python -c "import json,sys; d=json.load(sys.stdin); print(sorted(k for k in d if '<node>' in k.lower()))"`
    — nodes registered by a FAILED plugin are **partial-import residue**: modules imported
    before the failing line already mutated the global node registry. Missing main nodes =
    still broken; do not trust a partial node list as "working".

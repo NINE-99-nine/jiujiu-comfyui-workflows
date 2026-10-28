@@ -16,7 +16,7 @@ CONFIG_FILE = ROOT / "config.yaml"
 
 # --- 内置默认值（config.yaml 缺失时用这套，保证 clone 下来就能跑）---
 _DEFAULTS = {
-    "comfyui": {"url": "htt<local_path>", "input_dir": "", "models_dir": ""},
+    "comfyui": {"url": "http://127.0.0.1:8188", "input_dir": "", "models_dir": ""},
     "paths": {"work_root": str(ROOT / "_work")},
     "network": {"proxy": ""},
     "misc": {"serve_port": "8765"},

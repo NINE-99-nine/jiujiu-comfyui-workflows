@@ -11,7 +11,7 @@
 # 值里不要出现 # 号（会被当注释截断）。留空 = 用内置默认值。
 
 comfyui:
-  url: "htt<local_path>"     # ComfyUI 基址（含端口）
+  url: "http://127.0.0.1:8188"     # ComfyUI 基址（含端口）
   input_dir: ""                    # 往 ComfyUI 塞图时的 input 目录，留空=不指定
   models_dir: ""                   # ComfyUI models 目录，留空=不指定
 
@@ -21,7 +21,7 @@ paths:
   work_root: ""
 
 network:
-  proxy: ""                        # 下载模型/访问外网时用的代理，如 htt<local_path>
+  proxy: ""                        # 下载模型/访问外网时用的代理，如 http://127.0.0.1:7890；留空=直连
 
 misc:
   serve_port: 8765                 # scripts/serve_wf.py 的端口

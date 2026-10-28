@@ -33,7 +33,7 @@
         "models": [
           {
             "name": "qwen_image_2.1_int8_convrot.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/diffusion_models/qwen_image_2.1_int8_convrot.safetensors",
             "directory": "diffusion_models"
           }
         ]
@@ -76,7 +76,7 @@
         "models": [
           {
             "name": "qwen3vl_8b_int8_convrot.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/text_encoders/qwen3vl_8b_int8_convrot.safetensors",
             "directory": "text_encoders"
           }
         ]
@@ -122,7 +122,7 @@
         "models": [
           {
             "name": "qwen_image_2.1_vae_bf16.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Qwen-Image-2.1/resolve/main/vae/qwen_image_2.1_vae_bf16.safetensors",
             "directory": "vae"
           }
         ]

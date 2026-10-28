@@ -121,7 +121,7 @@ jiujiu-comfyui-workflows/
 
 | 键 | 作用 | 默认 |
 |---|---|---|
-| `comfyui.url` | ComfyUI 基址（含端口） | `htt<local_path>` |
+| `comfyui.url` | ComfyUI 基址（含端口） | `http://127.0.0.1:8188` |
 | `comfyui.input_dir` | 往 ComfyUI 塞图时的 input 目录 | 空（不指定） |
 | `comfyui.models_dir` | ComfyUI models 目录 | 空（不指定） |
 | `paths.work_root` | 成品拷到这里，按 `_work/<引子名>/` 分目录 | 技能目录下 `_work/` |
@@ -137,7 +137,7 @@ jiujiu-comfyui-workflows/
 
 | 项 | 值 |
 |---|---|
-| ComfyUI 地址 | `htt<local_path>`（Comfy Desktop 启动） |
+| ComfyUI 地址 | `http://127.0.0.1:8188`（Comfy Desktop 启动） |
 | 工作流原件目录 | `<local_path>`（只读） |
 | 模型目录 | `<local_path>` |
 | 输出目录 | `<local_path>`（**提交前必查 system_stats，防漂移 C 盘**） |

@@ -72,11 +72,11 @@ COMFYUI_GGUF_BACKEND=xpu
 - ComfyUI-Manager SSL verify bypass ENABLED (user\__manager\config.ini) — security note
 
 ## Pitfalls — env checks
-- **XPU wheel index is alphabetical**: `http<local_path><pkg>/` sorts "2.10.0" BEFORE "2.13.0". Verify by listing ALL matching lines, or trust uv/pip resolution.
+- **XPU wheel index is alphabetical**: `https://download.pytorch.org/whl/xpu/<pkg>/` sorts "2.10.0" BEFORE "2.13.0". Verify by listing ALL matching lines, or trust uv/pip resolution.
 - **PYTHONPATH pollution in git-bash**: run external venv python with `env -u PYTHONPATH`.
 - **2.10.0 vs 2.1.0 look-alike**: always confirm against the .venv's actual `torch.__version__`.
 
 ## How to verify server state
-- `curl htt<local_path>` — version/GPU/argv
-- `curl htt<local_path>` — running/pending
+- `curl http://127.0.0.1:8188/system_stats` — version/GPU/argv
+- `curl http://127.0.0.1:8188/queue` — running/pending
 - 出图日志：`<install>\ComfyUI\user\comfyui_8188.log`（模型加载方式/attention fallback 均在此）

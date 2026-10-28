@@ -1134,7 +1134,7 @@
         "models": [
           {
             "name": "qwen_image_vae.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/vae/qwen_image_vae.safetensors",
             "directory": "vae"
           }
         ]
@@ -1905,7 +1905,7 @@
         "models": [
           {
             "name": "qwen3vl_4b_fp8_scaled.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/text_encoders/qwen3vl_4b_fp8_scaled.safetensors",
             "directory": "text_encoders"
           }
         ]
@@ -2052,7 +2052,7 @@
         "models": [
           {
             "name": "krea2_turbo_fp8_scaled.safetensors",
-            "url": "http<local_path>",
+            "url": "https://huggingface.co/Comfy-Org/Krea-2/resolve/main/diffusion_models/krea2_turbo_fp8_scaled.safetensors",
             "directory": "diffusion_models"
           }
         ]
