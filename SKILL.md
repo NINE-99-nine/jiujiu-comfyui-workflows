@@ -65,9 +65,6 @@ jiujiu-comfyui-workflows/
 │   ├── voxcpm/               ← 🎙️ VoxCPM 配音（API 直连，可控克隆）
 │   │   ├── guide.md          ← VoxCPM 使用守则（提交方式/默认设置/Pitfalls）
 │   │   └── voxcpm全能工作流.json/.py ← API 模板副本 + 引子
-│   ├── pr-audio-dubbing/     ← 📽️ PR 自动配音（音频对齐字幕，pymiere 控制 PR）
-│   │   ├── guide.md          ← PR 配音使用守则（前置配置/参数/Pitfalls）
-│   │   └── pr_audio_dub.py    ← 引子（--dry-run 查对照表 / 放置，只传参）
 │   └── _archive/             ← 历史残留（zimage_live.json 等，不再引用）
 ├── execution/
 │   ├── comfy_submit.py       ← 通用递交执行器（图像+音频，唯一真正碰 ComfyUI 的件）
@@ -108,7 +105,6 @@ jiujiu-comfyui-workflows/
 | 「换个画风/换个风格/换个 lora」 | `workflows/anima/guide.md` → **画风选择规则**（clarify 选择题 A/B/C…，默认 gpt-image-2） |
 | 「用 IndexTTS-2 配音/念台词」 | `workflows/indextts2/guide.md` |
 | 「用 VoxCPM 配音/生成语音」（API 直连，改文本即可） | `workflows/voxcpm/guide.md` |
-| 「把音频导入 PR 对齐字幕/配音自动放置」 | `workflows/pr-audio-dubbing/guide.md` |
 | 「找优质提示词范本 / 复刻某种风格」（巨构·设计海报·人设卡片） | `prompt-library/krea2/README.md` |
 | 「找 qwen_image2.1 提示词范本 / 炫丽卡面复刻」 | `prompt-library/qwen_image2.1/README.md` |
 | 提交 / 执行 / 排障 | 各工作流**引子脚本**（`workflows/<名>/<名>_api.py`，与模板同 basename 自动配对；走 `execution/comfy_submit.py` 黑盒） |
