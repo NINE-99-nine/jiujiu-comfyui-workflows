@@ -29,3 +29,4 @@ Thumbs.db
 # 本机配置与构建缓存（发布构建器的中间产物，不属于源码）
 config.yaml
 .build_cache.json
+.build_report.txt
