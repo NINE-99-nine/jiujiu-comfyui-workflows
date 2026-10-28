@@ -25,7 +25,8 @@
 | **flux2图像正常编辑** | 🖼️ 整图 / 多参考编辑（最多 3 图融合） | `flux2图像正常编辑_api.py` |
 | **indextts2** | 🎙️ IndexTTS-2 配音 | `🌈 IndexTTS-2 integration-API.py` |
 | **voxcpm** | 🎙️ VoxCPM 配音（音色克隆） | `voxcpm全能工作流.py` |
-| **pr-audio-dubbing** | 🎬 Premiere 工程配音替换链路 | `pr_audio_dub.py` · `conv_wav.py` |
+
+> 每个工作流目录内另有 **`节点与lora下载地址.md`**：需要装哪些自定义节点包、下载哪些 LoRA、放到哪个目录，附原始发布页与 SHA256 校验值。
 
 ## 快速开始
 
