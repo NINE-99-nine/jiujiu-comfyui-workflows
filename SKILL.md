@@ -57,6 +57,10 @@ jiujiu-comfyui-workflows/
 │   │   ├── guide.md          ← 使用守则（五步链路 / 节点地图 / 参数表 / 多图语义 / 提示词三件事 / Pitfalls）
 │   │   ├── qwenimage2.1局部放大编辑_api.json/.py ← API 模板 + 引子（同 basename 配对）
 │   │   └── qwenimage2.1局部放大编辑.json ← UI 副本（6 分组 28 节点，仅供人看）
+│   ├── minimax_h3_image/     ← 🎨 **MiniMax H3 Image（文生图 + 图像编辑）**（6 步 / cfg 1 / lcm；**8MP 起步、上限 16MP**；宽高按 **32 倍数**自动对齐；出图缩放默认 2.5MP〔降采样〕；LoRA 尘星 0.8 固定不暴露）
+│   │   ├── guide.md          ← 使用守则（两套节点地图 / 参数面 / 分辨率机制 / 多图规则 / Pitfalls）
+│   │   ├── minimax_h3_image_t2i_api.json/.py  ← 文生图模板 + 引子（--ratio / --mp / --out-mp / --seed）
+│   │   └── minimax_h3_image_edit_api.json/.py ← 图像编辑模板 + 引子（--img1 / --ref×10 / base|custom 双分辨率模式）
 │   ├── indextts2/            ← 🎙️ IndexTTS-2 配音（narrator=none，需 [角色名] 标签）
 │   │   ├── guide.md          ← TTS 使用守则（提交方式/[65] 文本 + 角色语法）
 │   │   ├── 🌈 IndexTTS-2 integration-API.json/.py ← 导出 API 模板 + 引子
@@ -103,6 +107,7 @@ jiujiu-comfyui-workflows/
 | 「用 qwen_image 2.1 画 XX」/ 拿参考图编辑（临时子技能） | `workflows/qwen_image2.1/guide.md` |
 | 「qwen2.1 局部放大编辑」/ 只改原图某一块（脸/衣服/丝袜）+ 多图参考 | `workflows/qwenimage2.1局部放大编辑/guide.md` |
 | 「换个画风/换个风格/换个 lora」 | `workflows/anima/guide.md` → **画风选择规则**（clarify 选择题 A/B/C…，默认 gpt-image-2） |
+| 「用 MiniMax H3 image 画 XX」/ H3 文生图（8MP 起步、32 倍数对齐） | `workflows/minimax_h3_image/guide.md` |
 | 「用 IndexTTS-2 配音/念台词」 | `workflows/indextts2/guide.md` |
 | 「用 VoxCPM 配音/生成语音」（API 直连，改文本即可） | `workflows/voxcpm/guide.md` |
 | 「找优质提示词范本 / 复刻某种风格」（巨构·设计海报·人设卡片） | `prompt-library/krea2/README.md` |

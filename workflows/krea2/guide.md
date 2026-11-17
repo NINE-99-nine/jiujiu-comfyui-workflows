@@ -13,7 +13,7 @@
 | 项 | 值 |
 |---|---|
 | 固定副本 | `workflows/krea2/krea2汇总.json`（UI 格式，29 节点，MD5 `d2c51e14…`） |
-| API 参考 | `workflows/krea2/krea2汇总_api.json`（API 格式，27 节点，2026-08-23 作者导出） |
+| API 参考 | `workflows/krea2/krea2汇总_api.json`（API 格式，27 节点，2026-08-23 作者导出；`[16].inputs.loras` 于 2026-11-16 追加 `Krea2Rella_c1-st8000` 一条，属手工改动、非官方导出快照——后续重新导出时会被覆盖为此前状态） |
 | 原件位置 | `<local_path>` |
 | 模型族 | krea2 turbo（`krea2_turbo_int8_convrot`）+ wan_2.1 VAE + qwen3vl_4b_heretic CLIP（krea2 型） |
 | 出图链路（**三次处理**，8-31 作者新版） | [33] EmptyLatentImage（[31] 分辨率）→ [17] KSampler 7 步 cfg1（turbo 初次）→ [19] LatentUpscale 1.5× → [23] KSampler 10 步（精修）→ [21] VAEDecodeTiled → [20] ColorMatchV2 → [58] **SeedVR2 放大**（resolution=1600 短边 / max_resolution=2560 上限）→ [24] SaveImage。中间 [60] 清理显存 + [61] RAMCleanup 挂在 [20] 后 |
@@ -40,8 +40,16 @@
 - 服务端 `load_loras()` 把 `text` 参数 `del` 掉，**加载只看 `loras` 列表（wv[2]）的 `active:true` 条目**
 - `get_loras_list` 无 `loras` 键返回 `[]` = **0 个 LoRA 加载（裸模型）**
 - API 直连必须传 `inputs["loras"] = wv[2]`（引子 comfy_submit 已内置解包：把 `{"__value__": [...]}` 解为裸 list，服务端只按 active 加载）
-- **krea2 默认激活三件套**（8-23 作者工作流当前状态）：`krea2-Cc-天魔-身材:1.00` + `Krea2-realism_engine_v2_轻量:1.00` + `Krea2-滑块-细节PornMaster_Detail_Slider_Krea2_V1:0.70`；其余 8 个（2D动漫/Afterlight/Yoneyama_Mai/gpt anime render/harustyle/25D动漫/asianMix/动漫补丁）默认 inactive
-- ⚠️ **三件套 = 画质增强，不是画风**（作者 8-31 强调）：默认三件套全是**画质/细节/身材增强**，**没有一个是画风 lora**。其中 `Krea2-realism_engine_v2_轻量` 名字看着像"写实画风"，**其实是增强图片准确性/真实度**（画质类），**千万别当画风**。**换画风 lora 时，是在这三件套基础上额外加，绝不撤掉/替换它们**；传 `--loras` 只新增/激活目标画风条目，三件套保持 active（引子 + apply_lora_specs 仅改点名条目，天然不误撤）。
+- **krea2 默认激活四件套**（2026-11-16 更新，作者点名）：`krea2-Cc-天魔-身材:1.00` + `Krea2-realism_engine_v2_轻量:1.00` + `Krea2-滑块-细节PornMaster_Detail_Slider_Krea2_V1:0.70` + `Krea2Rella_c1-st8000:1.00`；其余 8 个（2D动漫/Afterlight/Yoneyama_Mai/gpt anime render/harustyle/25D动漫/asianMix/动漫补丁）默认 inactive
+- ⚠️ **前三条 = 画质增强，不是画风**（作者 8-31 强调）：默认前三条全是**画质/细节/身材增强**，**没有一个是画风 lora**。其中 `Krea2-realism_engine_v2_轻量` 名字看着像"写实画风"，**其实是增强图片准确性/真实度**（画质类），**千万别当画风**。**换画风 lora 时，是在这几条基础上额外加，绝不撤掉/替换它们**；传 `--loras` 只新增/激活目标画风条目，默认件保持 active（引子 + apply_lora_specs 仅改点名条目，天然不误撤）。
+- **第四件 `Krea2Rella_c1-st8000` 是风格类**（2026-11-06 入库，11-16 作者点名加进 [16] 节点并常开）：画风/人物倾向的风格条目，性质与前三条不同，属于作者偏好的常驻画风。
+
+## LoRA 库存与节点的一致性（2026-11-16 记录）
+
+- `models/loras/krea2/` 现有 **16 个 safetensors**；[16] 节点内 **12 条**（上面四件套 + 8 个 inactive）。
+- **尚未进节点的 4 条**：`Kook_Krea-2-真实幻想`、`Krea2-asia_cosplay_krea_2`、`krea2-Cc风情万种-风格`、`krea2_identity_edit_v1`。
+- 引子 `--loras` 只能改**节点内已存在**条目（同名定位）；**点名不存在的名字会被忽略**，不会新增条目。
+- **往节点里加新 LoRA 的唯一正规路径**：作者在 ComfyUI UI 的 LoraManager 里加好 → 「导出(API)」重新导出 `krea2汇总_api.json` → 替换本目录文件。**禁止 agent 手改 json 的 `loras` 数组**（会漏掉节点的 `text` 触发词串与前端状态，破坏模板保真）。
 
 ## 分辨率规则（⚠️ 三次处理 + 显存限制，8-31 作者新版）
 
@@ -93,3 +101,4 @@ python krea2汇总_api.py --prompt-file 提示词.txt --w 672 --h 1000 --name �
 - v1.0（2026-08-23）：作者提供 API 导出 + 使用原则，初步建立子技能（副本/guide/prompting）
 - v1.1（2026-09-07）：第 9 行提示词入口措辞更新——去词量硬限（可长可细），并指向案例库 `prompt-library/krea2-poster-examples/`
 - v1.2（2026-09-14）：引子新增 `--prompt-file`（与 `--prompt` 互斥）——根治"提示词含英文引号被 PowerShell 截断"问题；提交方式段补用法与原因，留备份 `krea2汇总_api.py.bak_20260914`。实测：含 `"SELINA"` 引号、2731 字、13 段的文件逐字进 [13]，`--prompt` 老用法回归一致。
+- v1.3（2026-11-16）：[16] 节点追加 `Krea2Rella_c1-st8000`（作者点名常开），默认激活由三件套变四件套；补「LoRA 库存与节点的一致性」段——库内 16 条 / 节点 12 条 / 未入库 4 条，并写明「往节点加 LoRA 必须重新导出 API 模板，禁止 agent 手改 json」。

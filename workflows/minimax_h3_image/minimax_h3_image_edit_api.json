@@ -1,0 +1,557 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "2026-11-17/222344",
+      "images": [
+        "63",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "保存图像"
+    }
+  },
+  "29": {
+    "inputs": {
+      "unet_name": "MiniMax_H3 image\\minimax_h3_image_pruned_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "UNETLoader",
+    "_meta": {
+      "title": "UNet加载器"
+    }
+  },
+  "30": {
+    "inputs": {
+      "clip_name": "qwen3vl_32b_minimax_h3_int8_convrot.safetensors",
+      "type": "minimax",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "加载CLIP"
+    }
+  },
+  "31": {
+    "inputs": {
+      "vae_name": "minimax_h3_image_vae_fp16.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "加载VAE"
+    }
+  },
+  "32": {
+    "inputs": {
+      "prompt": [
+        "43",
+        0
+      ],
+      "width": [
+        "164",
+        0
+      ],
+      "height": [
+        "164",
+        1
+      ],
+      "clip": [
+        "30",
+        0
+      ],
+      "vae": [
+        "31",
+        0
+      ],
+      "images.image_0": [
+        "171",
+        0
+      ]
+    },
+    "class_type": "MiniMaxH3ImageConditioning",
+    "_meta": {
+      "title": "MiniMax H3 Image Conditioning"
+    }
+  },
+  "33": {
+    "inputs": {
+      "conditioning": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "ConditioningZeroOut",
+    "_meta": {
+      "title": "条件零化"
+    }
+  },
+  "38": {
+    "inputs": {
+      "seed": 1090078700173761,
+      "steps": 6,
+      "cfg": 1,
+      "sampler_name": "lcm",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "142",
+        0
+      ],
+      "positive": [
+        "32",
+        0
+      ],
+      "negative": [
+        "33",
+        0
+      ],
+      "latent_image": [
+        "169",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "K采样器"
+    }
+  },
+  "42": {
+    "inputs": {
+      "samples": [
+        "38",
+        0
+      ],
+      "vae": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE解码"
+    }
+  },
+  "43": {
+    "inputs": {
+      "value": "图1 中银白卷发、戴黑色蕾丝发带、异色瞳孔（左眼偏蓝绿、右眼偏暖黄）的二次元少女面部特写是主体1。\n\n目标画面是一张竖版 3:4 的现代先锋数字艺术海报，整体采用极简的平面排版与高对比度的光影设计。画面以主体1 的面部特写为绝对的视觉中心，将二次元的精致五官与先锋时尚的 UI 排版、全息故障质感完美融合。\n\n主体1 部分保留：少女的面部特征、银白卷发的发丝走向、黑色蕾丝发带的结构、青绿与暖黄渐变的异色瞳孔、微张的嘴唇，以及原图中强烈的顶侧光照射和肌肤的光影过渡保持不变；改变的是背景环境、画面的版式结构，并增加了排版文字与数字干扰元素。\n\n背景是一面带有极细颗粒质感的深冷灰色哑光金属墙，呈现出高级的工业现代感，将主体1 白皙透亮的面部高高托起。画面的平面排版元素极具先锋杂志感：巨大的白色无衬线粗体英文“CHROMA”横跨画面中央，作为背景字被主体1 的头部自然遮挡了一部分；画面左上角有一个极细的白色矩形线框，内部排列着极小的坐标数字与条形码；画面右侧边缘，竖排着极细的深灰色英文“DIGITAL SYNTHESIS · ISSUE 01”，字间距拉得很开。画面底部有一行很小的纯白色文字“VISUAL ARCHIVE”。\n\n在故障艺术与全息质感上，主体1 的脸颊和发丝边缘叠加了极细的横向 RGB 色散边缘（红蓝重影），几道水平的数字扫描线切过她的左眼和右侧的发梢。银色发丝的高光处闪烁着彩虹般的棱镜折射。瞳孔内部被刻画出微小的网格状高光，仿佛眼球的晶状体是由精密的数字屏幕构成。整体画面被一层极其细微的印刷网点与噪点覆盖，消除纯数码的平滑感，呈现出极致的高级感与精美度。"
+    },
+    "class_type": "PrimitiveStringMultiline",
+    "_meta": {
+      "title": "Text (user_prompt)"
+    }
+  },
+  "61": {
+    "inputs": {
+      "value": false
+    },
+    "class_type": "PrimitiveBoolean",
+    "_meta": {
+      "title": "Boolean (Enable PE?)"
+    }
+  },
+  "63": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "megapixels": 2.5,
+      "resolution_steps": 1,
+      "image": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "ImageScaleToTotalPixels",
+    "_meta": {
+      "title": "缩放图像（像素）"
+    }
+  },
+  "64": {
+    "inputs": {
+      "images": [
+        "63",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "预览图像"
+    }
+  },
+  "90": {
+    "inputs": {
+      "image": "小女仆_平涂侧颜特写_20261116_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "底图"
+    }
+  },
+  "91": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 12,
+      "scale_method": "area",
+      "input": [
+        "90",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "调整图像/掩码大小"
+    }
+  },
+  "92": {
+    "inputs": {
+      "resize_type": "scale to multiple",
+      "resize_type.multiple": 32,
+      "scale_method": "area",
+      "input": [
+        "91",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "调整图像/掩码大小"
+    }
+  },
+  "93": {
+    "inputs": {
+      "image": "赛琳娜_贴纸海报群青底_库档长度_mix_横版大图_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图2"
+    }
+  },
+  "96": {
+    "inputs": {
+      "image": "小女仆_平涂侧颜特写_20261116_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图3"
+    }
+  },
+  "99": {
+    "inputs": {
+      "image": "赛琳娜蓝色漫画分格海报_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图4"
+    }
+  },
+  "139": {
+    "inputs": {
+      "image": "莉莉丝_凯特琳式海报_krea2直出_20260825.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图5"
+    }
+  },
+  "142": {
+    "inputs": {
+      "lora_name": "Minimax_H3_Image\\KOOK-Minimax-H3-image-尘星.safetensors",
+      "strength_model": 0.8,
+      "model": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoRA加载器（仅模型）"
+    }
+  },
+  "145": {
+    "inputs": {
+      "image": "000759_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图7"
+    }
+  },
+  "146": {
+    "inputs": {
+      "image": "131300_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图8"
+    }
+  },
+  "147": {
+    "inputs": {
+      "image": "%Empty Latent Image.width%x%Empty_00074_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图9"
+    }
+  },
+  "148": {
+    "inputs": {
+      "image": "012715_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图10"
+    }
+  },
+  "149": {
+    "inputs": {
+      "image": "立体构成主义海报_小女仆_下午茶_横版_20261016_2026-10-16.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图6"
+    }
+  },
+  "150": {
+    "inputs": {
+      "image": "121935_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "图11"
+    }
+  },
+  "162": {
+    "inputs": {
+      "value": 8
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "分辨率（百万）"
+    }
+  },
+  "164": {
+    "inputs": {
+      "image": [
+        "92",
+        0
+      ]
+    },
+    "class_type": "GetImageSize",
+    "_meta": {
+      "title": "获取图像尺寸"
+    }
+  },
+  "165": {
+    "inputs": {
+      "aspect_ratio": "16:9 (Widescreen)",
+      "megapixels": [
+        "162",
+        0
+      ],
+      "multiple": 32
+    },
+    "class_type": "ResolutionSelector",
+    "_meta": {
+      "title": "分辨率选择器"
+    }
+  },
+  "168": {
+    "inputs": {
+      "width": [
+        "165",
+        0
+      ],
+      "height": [
+        "165",
+        1
+      ],
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "空Latent图像"
+    }
+  },
+  "169": {
+    "inputs": {
+      "switch": false,
+      "on_false": [
+        "32",
+        1
+      ],
+      "on_true": [
+        "168",
+        0
+      ]
+    },
+    "class_type": "ComfySwitchNode",
+    "_meta": {
+      "title": "底图/自定义"
+    }
+  },
+  "171": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.2,
+      "scale_method": "area",
+      "input": [
+        "92",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "172": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "93",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "173": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.2,
+      "scale_method": "area",
+      "input": [
+        "96",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "174": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "99",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "175": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "139",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "176": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "149",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "177": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "145",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "178": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "146",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "179": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "147",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "180": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "148",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  },
+  "181": {
+    "inputs": {
+      "resize_type": "scale total pixels",
+      "resize_type.megapixels": 1.5,
+      "scale_method": "area",
+      "input": [
+        "150",
+        0
+      ]
+    },
+    "class_type": "ResizeImageMaskNode",
+    "_meta": {
+      "title": "输入前缩放"
+    }
+  }
+}

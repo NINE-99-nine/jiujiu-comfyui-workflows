@@ -240,6 +240,14 @@
             "expanded": false,
             "clipStrength": 1,
             "locked": false
+          },
+          {
+            "name": "Krea2Rella_c1-st8000",
+            "strength": 1,
+            "active": true,
+            "expanded": false,
+            "clipStrength": 1,
+            "locked": false
           }
         ]
       },
