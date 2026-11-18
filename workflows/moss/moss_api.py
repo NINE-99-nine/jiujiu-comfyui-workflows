@@ -2,7 +2,7 @@
 # ============ moss_api.py · MOSS-Image 引子 v4（黑箱，agent 只传参数） ============
 # 与 moss_api.json 同 basename → 自动配对。模板 = 20 节点（LoRA 堆 + 分辨率大师简化版）。
 #
-# 链路：13 UNet → 61 加速 LoRA(lodestones-8-steps-dmd2-lora @1.0) → 93 LoraManager(9 条，默认 1 条)
+# 链路：13 UNet → 61 加速 LoRA(lodestones-8-steps-dmd2-lora @1.0) → 93 LoraManager(12 条，默认 3 条：画风 1 + 质量 2)
 #       → 19 KSampler(8 步 / cfg 1.0 / er_sde / simple) → 22 VAEDecode
 #       → 103 AnySwitch → 97 AnySwitch → 81 SaveImage
 # 提示词：93 触发词 → 101 JoinStringMulti(串1=触发词 / 串2=98 质量词 / 串3=99 提示词) → 121 AnySwitch → 4 正向 CLIPTextEncode
@@ -42,8 +42,13 @@ P_SW_LO    = "103"   # AnySwitch：喂给放大器的输入
 P_UPSCALER = "85"    # SeedVR2VideoUpscaler（模板里没有，--upscale 时内存补）
 
 DEFAULT_STEPS = 8                                               # 2026-10-25 定档；模板已同步为 8
-DEFAULT_LORA = "moss_context_detaile_tweaker_20261018_rank2"   # 细节调节器（不许自作主张关）
-DEFAULT_LORAS = (DEFAULT_LORA,)                                 # 默认只开细节档；观澜是写实画风 LoRA，不是质量档（2026-10-26 控制变量实测：它拉低质量、且与 cfg 1.0 冲突），默认关闭
+# 默认三条（2026-11-18 按作者当前 ComfyUI 工作流同步）：1 条画风 + 2 条质量
+DEFAULT_STYLE_LORA = "mossNai5E585B6E4B889.Ng66"                 # 画风档（civitai 触发词 @painterly cine）
+DEFAULT_QUALITY_LORAS = (                                       # 质量档，两条叠着开
+    "moss-masterpieces-moss-timestep",                          # masterpieces 向
+    "moss_context_detaile_tweaker_20261018_rank2",              # 细节调节 0.60
+)
+DEFAULT_LORAS = (DEFAULT_STYLE_LORA,) + DEFAULT_QUALITY_LORAS   # 除作者点名，这三条不许关；其余 9 条由引子强制关闭
 SEED_MAX = 4294967295   # seedvr2 节点的 seed 上限 2^32-1
 
 # MOSS-Image 要求宽高是 16 的倍数
@@ -96,7 +101,7 @@ def _sync_lora_text(wf):
 def apply_loras(wf, specs, no_default):
     """specs: ["名:强度:on|off", ...] —— 只动点名条目，其余保持模板原样。
 
-    🔴 P0：不传 specs 且不关默认时，除默认那条（细节档）以外全部强制关闭。
+    🔴 P0：不传 specs 且不关默认时，除默认三条（画风 1 + 质量 2）以外全部强制关闭。
     「默认只有一条 LoRA」由程序钉住，不靠自觉（作者 2026-10-26 改：观澜降级为普通画风 LoRA）。
     """
     arr = _loras(wf)
@@ -265,12 +270,14 @@ def print_loras():
     for i, e in enumerate(arr, 1):
         star = "★" if e.get("active") else " "
         tag = ""
-        if e["name"] == DEFAULT_LORA:
-            tag = "  ← 默认·细节档，除作者点名不许关"
-        elif e["name"] in DEFAULT_LORAS:
-            tag = "  ← 默认·质量提升档(KOOK)，除作者点名不许关"
+        if e["name"] == DEFAULT_STYLE_LORA:
+            tag = "  ← 默认·画风档，除作者点名不许关"
+        elif e["name"] in DEFAULT_QUALITY_LORAS:
+            tag = "  ← 默认·质量档，除作者点名不许关"
+        else:
+            tag = ""
         print(f"  {i:>2}. {star} {e['name']}  (strength {e['strength']}){tag}")
-    print('\n用法：--loras "<名字>:<强度>:on|off"，可重复传；--no-default-lora 关掉默认那条（细节档）。')
+    print(f'\n用法：--loras "<名字>:<强度>:on|off"，可重复传；--no-default-lora 关掉默认三条（画风 + 质量 ×2）。')
 
 
 def main():
@@ -298,8 +305,9 @@ def main():
     p.add_argument("--cfg", type=float, default=None, help="覆盖 CFG（模板 1.0，2026-10-26 实测 1.0 质量高于 3.5）")
     p.add_argument("--loras", action="append", default=[],
                    help='LoRA 开关，格式 "名:强度:on|off"，可重复传。'
-                        '🔴 默认不传＝只有模板那条 moss_context_detaile_tweaker@0.60 生效，'
-                        '画风请用提示词控制；只有作者明确点名某条时才传这个参数')
+                        '🔴 默认不传＝只开默认三条（画风 mossNai5E585B6E4B889.Ng66@1.0 ＋ 质量 '
+                        'moss-masterpieces-moss-timestep@1.0 ＋ moss_context_detaile_tweaker@0.60），'
+                        '其余 9 条由引子强制关闭；只有作者明确点名某条时才传这个参数')
     p.add_argument("--no-default-lora", dest="no_default_lora", action="store_true",
                    help=f"关掉默认 LoRA（{' + '.join(DEFAULT_LORAS)}）")
     p.add_argument("--seedvr2-res", dest="seedvr2_res", type=int, default=None,

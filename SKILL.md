@@ -43,7 +43,7 @@ jiujiu-comfyui-workflows/
 │   │   ├── prompting.md      ← 提示词总纲（画风质感→画面内容→构图镜头；**无词量硬限**，设计类可长可细；引号标文字）
 │   │   ├── krea2汇总_api.json/.py   ← 唯一合法 API 模板 + 引子
 │   │   └── krea2汇总.json    ← 固定副本（UI 格式）
-│   ├── moss/                 ← 🎨 MOSS-Image 生图（**8 步 / cfg 1.0** ＋ **LoRA 堆 9 条**，默认只开 1 条：细节档 ＋ **放大默认关**（模板无 SeedVR2 节点，`--upscale` 时引子内存补链到短边 1440）；Caption / Layout 两种提示词）
+│   ├── moss/                 ← 🎨 MOSS-Image 生图（**8 步 / cfg 1.0** ＋ **LoRA 堆 12 条**，默认开 3 条：画风 1 ＋ 质量 2 ＋ **放大默认关**（模板无 SeedVR2 节点，`--upscale` 时引子内存补链到短边 1440）；Caption / Layout 两种提示词）
 │   │   ├── guide.md          ← 使用守则（能力边界 / 模型体量与显存 / 两份副本分工 / **两个提示词框** / 分辨率节点 154 / 采样档 / LoRA / 放大 / UI 独有分组 / 致命错误）
 │   │   ├── prompting.md      ← 提示词编写（**§1 三形态判定 / §2 九要素下笔骨架 / §3 Caption 硬规则 / §4 扩写档 / §5 Tag 串 / §6 Layout / §7 bbox 保护九条 / §8 与工作流的关系 / §9 JSON 管不了的三件事 / §10 翻车对照＋自查**）
 │   │   ├── moss_api.json/.py ← API 模板（**20 节点**）+ 引子（--loras / --upscale / --seedvr2-res / --list-loras）
@@ -101,7 +101,7 @@ jiujiu-comfyui-workflows/
 |---|---|
 | 「用 anima 画 XX」/ 正常图 / NSFW 图 / 多人图 | `workflows/anima/guide.md` |
 | 「用 krea2 画 XX」/ krea2 生图 | `workflows/krea2/guide.md` |
-| 「用 MOSS 画 XX」/ MOSS-Image 生图（caption / 精确文字版式；**8 步 cfg 1.0、默认一条 LoRA（细节档）、默认不放大**） | `workflows/moss/guide.md` |
+| 「用 MOSS 画 XX」/ MOSS-Image 生图（caption / 精确文字版式；**8 步 cfg 1.0、默认三条 LoRA（画风 1 + 质量 2）、默认不放大**） | `workflows/moss/guide.md` |
 | 「我要自己在 ComfyUI 里跑 MOSS」/ 看 MOSS 的 UI 结构 | `workflows/moss/moss_image.json` ＋ guide 的「§三 两份 json 的分工」「§九 UI 版独有的四个分组」 |
 | 「用 z image 画 XX」（中文提示词/大宽图/巨构） | `workflows/zimage/guide.md` |
 | 「用 qwen_image 2.1 画 XX」/ 拿参考图编辑（临时子技能） | `workflows/qwen_image2.1/guide.md` |

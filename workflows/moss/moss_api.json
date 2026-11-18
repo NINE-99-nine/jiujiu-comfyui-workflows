@@ -166,9 +166,18 @@
         "version": 1,
         "textWidgetName": "text"
       },
-      "text": "<lora:anireal_moss_lora_v1:1.00> <lora:kzmynon-moss-v1_comfyui:1.00> <lora:MOSS-HOCF_000001925:1.00> <lora:Nyalia_moss_v1_lokr:1.00> <lora:wlop12:1.00> <lora:moss_context_detaile_tweaker_20261018_rank2:0.60> <lora:fkey-lora-r4-muon-step6840-comfy:1.00> <lora:LP Flat-moss-v2:1.00>",
+      "text": "<lora:anireal_moss_lora_v1:1.00> <lora:kzmynon-moss-v1_comfyui:1.00> <lora:MOSS-HOCF_000001925:1.00> <lora:Nyalia_moss_v1_lokr:1.00> <lora:wlop12:1.00> <lora:moss_context_detaile_tweaker_20261018_rank2:0.60> <lora:KOOK-MOSS-SFT-观澜:1.00> <lora:fkey-lora-r4-muon-step6840-comfy:1.00> <lora:gladas-style-moss_v1:1.00> <lora:LP Flat-moss-v2:1.00> <lora:mossNai5E585B6E4B889.Ng66:1.00> <lora:moss-masterpieces-moss-timestep:1.00>",
       "loras": {
         "__value__": [
+          {
+            "name": "moss-masterpieces-moss-timestep",
+            "strength": 1,
+            "active": true,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
           {
             "name": "moss_context_detaile_tweaker_20261018_rank2",
             "strength": "0.60",
@@ -188,7 +197,16 @@
             "locked": false
           },
           {
-            "name": "fkey-lora-r4-muon-step6840-comfy",
+            "name": "mossNai5E585B6E4B889.Ng66",
+            "strength": 1,
+            "active": true,
+            "expanded": false,
+            "clipStrength": 1,
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "LP Flat-moss-v2",
             "strength": 1,
             "active": false,
             "expanded": false,
@@ -198,6 +216,15 @@
           },
           {
             "name": "Nyalia_moss_v1_lokr",
+            "strength": "1.00",
+            "active": false,
+            "expanded": false,
+            "clipStrength": "1.00",
+            "selected": false,
+            "locked": false
+          },
+          {
+            "name": "fkey-lora-r4-muon-step6840-comfy",
             "strength": 1,
             "active": false,
             "expanded": false,
@@ -229,7 +256,7 @@
             "active": false,
             "expanded": false,
             "clipStrength": 1,
-            "selected": true,
+            "selected": false,
             "locked": false
           },
           {
@@ -242,7 +269,7 @@
             "locked": false
           },
           {
-            "name": "LP Flat-moss-v2",
+            "name": "gladas-style-moss_v1",
             "strength": 1,
             "active": false,
             "expanded": false,

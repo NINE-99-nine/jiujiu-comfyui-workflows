@@ -27,8 +27,8 @@ python workflows/moss/moss_api.py --list-loras
 | `--width` / `--height` | 直接钉死，优先于 ratio/megapixels；自动对齐 16 倍数 |
 | `--name` | 文件名前缀，也是输出子目录名 |
 | `--seed` | `-1` 随机；固定值可复现 |
-| `--loras` | `名:强度:on\|off`，可重复；默认不传＝只有两条默认 |
-| `--no-default-lora` | 关掉两条默认 |
+| `--loras` | `名:强度:on\|off`，可重复；默认不传＝只开默认三条（画风 1 + 质量 2） |
+| `--no-default-lora` | 关掉默认三条 |
 | `--steps` / `--cfg` | 覆盖采样档；只在明确要求时传 |
 | `--upscale` / `--seedvr2-res` | SeedVR2 放大（默认关，短边 1440） |
 
@@ -52,20 +52,25 @@ python workflows/moss/moss_api.py --list-loras
 
 ## LoRA
 
-默认开两条，其余六条由引子强制关闭：
+**12 条槽位，默认开三条：画风 1 + 质量 2**（2026-11-18 按作者当前 ComfyUI 工作流同步）。其余九条由引子强制关闭。
 
 | # | 名字 | 定位 | 默认 |
 |---|---|---|---|
-| 1 | `moss_context_detaile_tweaker_20261018_rank2` | 细节调节 | ★ 0.60 |
-| 2 | `KOOK-MOSS-SFT-观澜` | **写实画风**（不是质量档） | 关（默认关；实测会降质量，与 cfg 1.0 冲突） |
-| 3 | `fkey-lora-r4-muon-step6840-comfy` | 画风 | 关 |
-| 4 | `Nyalia_moss_v1_lokr` | 动漫画风 | 关 |
-| 5 | `kzmynon-moss-v1_comfyui` | 动漫画风 | 关 |
-| 6 | `anireal_moss_lora_v1` | 写实 | 关 |
-| 7 | `MOSS-HOCF_000001925` | 巨构 | 关 |
-| 8 | `wlop12` | 油画 | 关 |
-| 9 | `LP Flat-moss-v2` | 线稿 / 平涂线稿 | 关 |
+| 1 | `moss-masterpieces-moss-timestep` | **质量**（masterpieces 向） | ★ 1.0 |
+| 2 | `moss_context_detaile_tweaker_20261018_rank2` | **质量**·细节调节 | ★ 0.60 |
+| 3 | `KOOK-MOSS-SFT-观澜` | 写实画风（不是质量档） | 关（实测降质量，与 cfg 1.0 冲突） |
+| 4 | `mossNai5E585B6E4B889.Ng66` | **画风**（painterly cine；带 civitai 触发词 `@painterly cine`、`nuanced lighting transitions…moist glossy skin highlight`） | ★ 1.0 |
+| 5 | `LP Flat-moss-v2` | 线稿 / 平涂 | 关 |
+| 6 | `Nyalia_moss_v1_lokr` | 动漫画风 | 关 |
+| 7 | `fkey-lora-r4-muon-step6840-comfy` | 画风 | 关 |
+| 8 | `kzmynon-moss-v1_comfyui` | 动漫画风 | 关 |
+| 9 | `anireal_moss_lora_v1` | 写实 | 关 |
+| 10 | `MOSS-HOCF_000001925` | 巨构 | 关 |
+| 11 | `wlop12` | 油画 | 关 |
+| 12 | `gladas-style-moss_v1` | 画风（未实测） | 关 |
 
+- ⚠️ **触发词串是假信号**：`LoraManager` 会把 12 条名字**全都**写进正向提示词的 `<lora:…>` 串，不管开没开。所以照别人的图推配置时，长串里出现的名字 ≠ 生效的 LoRA——真正吃进去的只有 ★ 三条（或你点名的）。
+- 第 4 条画风档带 civitai 触发词（`@painterly cine` 等），但**当前工作流没有把它写进提示词**；想更贴它的训练分布可以手动加进 caption。
 - 不点名就不开；她说「用 LoRA」没说哪条＝先 `--list-loras` 带编号让她挑。
 - MOSS 上叠 2–3 条为上限（默认已占 2 条）。
 - 名字打错只往 stderr 打 `WARN`，图照出但该条没生效——批量跑完 grep 一次 `WARN`。
